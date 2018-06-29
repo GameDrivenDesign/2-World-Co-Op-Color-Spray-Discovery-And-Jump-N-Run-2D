@@ -50,6 +50,7 @@ invert_border = 100.0
 
 position = Vector2( 0, -10 )
 input_pickable = true
+space_override = 3
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
@@ -68,6 +69,7 @@ _sections_unfolded = [ "Transform" ]
 
 position = Vector2( 0, 10 )
 input_pickable = true
+space_override = 3
 gravity_vec = Vector2( 0, -1 )
 gravity = 98.0
 linear_damp = 0.1
