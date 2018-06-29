@@ -10,6 +10,8 @@ export (int) var jumpVelocity = 200
 
 var upDirection
 
+const FLOOR_COLLISION_AVOIDANCE_DISTANCE = 0.1
+
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
@@ -44,5 +46,7 @@ func _integrate_forces(state):
 	velocity += movementDirectionFromInput() * movementVelocity
 	state.linear_velocity += velocity
 	state.linear_velocity.x = clamp(state.linear_velocity.x, -movementVelocity, movementVelocity)
+	if (onFloor()):
+		state.transform.origin += upDirection * FLOOR_COLLISION_AVOIDANCE_DISTANCE
 	
 	
