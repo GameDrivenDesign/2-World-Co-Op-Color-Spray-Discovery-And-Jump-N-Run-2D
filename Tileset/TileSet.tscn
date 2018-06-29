@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/red_block.png" type="Texture" id=1]
 [ext_resource path="res://Assets/green_block.png" type="Texture" id=2]
 [ext_resource path="res://Assets/white_block.png" type="Texture" id=3]
 [ext_resource path="res://Assets/black_block.png" type="Texture" id=4]
+[ext_resource path="res://Assets/orange_block_acceleration.png" type="Texture" id=5]
+[ext_resource path="res://Assets/orange_block_jump.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -87,6 +89,46 @@ friction = 1.0
 bounce = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlackBlock/BlackBlockStaticBody" index="0"]
+
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="OrangeBlock" type="Sprite" parent="." index="4"]
+
+position = Vector2( 353.434, 1.58892 )
+texture = ExtResource( 5 )
+
+[node name="OrangeBlockStaticBody" type="StaticBody2D" parent="OrangeBlock" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OrangeBlock/OrangeBlockStaticBody" index="0"]
+
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="BlueBlock" type="Sprite" parent="." index="5"]
+
+position = Vector2( 448.66, 0.228569 )
+texture = ExtResource( 6 )
+
+[node name="BlueBlockStaticBody" type="StaticBody2D" parent="BlueBlock" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlueBlock/BlueBlockStaticBody" index="0"]
 
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
