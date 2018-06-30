@@ -125,8 +125,15 @@ func disposeColor():
 		var tilePoint = playerBottomPosition + Vector2(0, -upDirection.y * verticalHalfTileExtent)
 		var tilePos = map.world_to_map(tilePoint)
 		var currentTileIndex = 0
-		var currentColor = getPaintColor()
-		var tileName = Colors.rgb_to_color_name(currentColor).capitalize() + "Block"
+		var is_additive = tilePos.y >= 0
+		var currentTileName = map.tile_set.tile_get_name(map.get_cellv(tilePos))
+		var currentTileColorName = currentTileName.split("Block")[0].to_lower()
+		var newColor
+		if is_additive:
+			newColor = Colors.mix_additive_rgb(Colors.color_name_to_rgb(currentTileColorName), getPaintColor())
+		else:
+			newColor = Colors.mix_subtractive_rgb(Colors.color_name_to_rgb(currentTileColorName), getPaintColor())
+		var tileName = Colors.rgb_to_color_name(newColor).capitalize() + "Block"
 		var tileId = map.tile_set.find_tile_by_name(tileName)
 		map.set_cellv(tilePos, tileId)
 		if $sounds/stomp.get_playback_position() > 0.2 || !$sounds/stomp.playing:
