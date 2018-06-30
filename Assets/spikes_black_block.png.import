@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/orange_block_acceleration.png-64ce442fc95a6a21da6d3dd3abc91637.stex"
+path="res://.import/spikes_black_block.png-6d8c0aeb15b5bd6ebc0d88aeeafdd002.stex"
 
 [deps]
 
-source_file="res://Assets/orange_block_acceleration.png"
-dest_files=[ "res://.import/orange_block_acceleration.png-64ce442fc95a6a21da6d3dd3abc91637.stex" ]
+source_file="res://Assets/spikes_black_block.png"
+dest_files=[ "res://.import/spikes_black_block.png-6d8c0aeb15b5bd6ebc0d88aeeafdd002.stex" ]
 
 [params]
 

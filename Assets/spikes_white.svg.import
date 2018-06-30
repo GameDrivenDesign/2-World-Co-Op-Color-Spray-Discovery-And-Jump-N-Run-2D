@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/orange_block_jump.png-46889c99912a0bf8d7f528db1899b404.stex"
+path="res://.import/spikes_white.svg-19f6d85c60c34a53937c33111d0041de.stex"
 
 [deps]
 
-source_file="res://Assets/orange_block_jump.png"
-dest_files=[ "res://.import/orange_block_jump.png-46889c99912a0bf8d7f528db1899b404.stex" ]
+source_file="res://Assets/spikes_white.svg"
+dest_files=[ "res://.import/spikes_white.svg-19f6d85c60c34a53937c33111d0041de.stex" ]
 
 [params]
 
