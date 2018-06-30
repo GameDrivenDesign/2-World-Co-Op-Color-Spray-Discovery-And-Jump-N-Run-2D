@@ -6,3 +6,4 @@ func _ready():
 	$CollisionShape2D.position.y = -5
 	playerID = "dragon"
 	._ready()
+

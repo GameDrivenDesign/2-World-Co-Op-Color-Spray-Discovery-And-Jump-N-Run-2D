@@ -29,6 +29,8 @@ var upDirection
 var inputMovementDirection
 var movementState = MovementState.STANDING
 var currentLinearVelocity
+var screenDims = OS.get_real_window_size()
+const marginToScreenWidth = 50
 
 var playerID
 
@@ -64,7 +66,7 @@ func processAnimation():
 	var nextMovementState = currentMovementState()
 	
 	if movementState == MovementState.FALLING && (nextMovementState == MovementState.STANDING || nextMovementState == MovementState.WALKING):
-		$sounds/landing.play()
+		$sounds/common/landing.play()
 	
 	if movementState != nextMovementState:
 		movementState = nextMovementState
@@ -74,14 +76,14 @@ func processAnimation():
 				animationName = "standing"
 			MovementState.WALKING:
 				animationName = "walking"
-				$sounds/walking.play()
+				$sounds/common/walking.play()
 			MovementState.JUMPING:
 				animationName = "jumping"
 			MovementState.FALLING:
 				animationName = "falling"
 		$Node2D/AnimationPlayer.play(animationName)
-	if movementState == MovementState.WALKING && !$sounds/walking.playing:
-		$sounds/walking.play()
+	if movementState == MovementState.WALKING && !$sounds/common/walking.playing:
+		$sounds/common/walking.play()
 
 func _process(delta):
 	processAnimation()
@@ -152,9 +154,15 @@ func disposeColor():
 		var tilePoint = playerBottomPosition + Vector2(0, -upDirection.y * verticalHalfTileExtent)
 		var tilePos = map.world_to_map(tilePoint)
 		paintBlock(tilePos)
-		if $sounds/stomp.get_playback_position() > 0.2 || !$sounds/stomp.playing:
-			$sounds/stomp.play()
-		
+
+		if $sounds/common/stomp.get_playback_position() > 0.2 || !$sounds/common/stomp.playing:
+			$sounds/common/stomp.play()
+
+func correctMovementAccordingToViewport(movementFromInput):
+	var posRelativeToViewportX = get_global_transform_with_canvas().get_origin().x
+	if(posRelativeToViewportX < marginToScreenWidth and movementFromInput.x < 0) or (posRelativeToViewportX > screenDims.x - marginToScreenWidth and movementFromInput.x > 0):
+		movementFromInput.x = 0 # stop moving to far to one side
+	return movementFromInput
 
 func stuckAvoidance(state):
 	if onFloor():
@@ -168,10 +176,13 @@ func stuckAvoidance(state):
 
 func _integrate_forces(state):
 	var velocity = Vector2(0, 0)
+	
 	if (requestsJump() && onFloor()):
 		velocity += upDirection * jumpVelocity
-		$sounds/jump.play()
-	inputMovementDirection = movementDirectionFromInput()
+		$sounds/common/jump.play()
+		
+	inputMovementDirection = correctMovementAccordingToViewport(movementDirectionFromInput())
+
 	velocity += inputMovementDirection * movementVelocity
 	state.linear_velocity += velocity
 	state.linear_velocity.x = clamp(state.linear_velocity.x, -movementVelocity, movementVelocity)

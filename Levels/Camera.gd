@@ -7,7 +7,8 @@ var player1 = null
 var player2 = null
 
 const BEFORE_REACHING_SIDE_ZOOM_FACTOR = 1.5
-const MIN_ZOOM_FACTOR = 1.0
+const MIN_ZOOM_FACTOR = 0.8
+const MAX_ZOOM_FACTOR = 2.0
 
 func _ready():
 	player1 = get_node(player1_path)
@@ -27,6 +28,6 @@ func _process(delta):
 	# Zoom the camera. Bigger zoom factors leads to zooming out.
 	# The lower bound zoom is set to MIN_ZOOM_FACTOR, so that we never zoom nearer than initially. 
 	var zoom = distance / screen_size * BEFORE_REACHING_SIDE_ZOOM_FACTOR
-	var zoom_factor = max(max(zoom.x, zoom.y), MIN_ZOOM_FACTOR)
+	var zoom_factor = min(max(max(zoom.x, zoom.y), MIN_ZOOM_FACTOR), MAX_ZOOM_FACTOR)
 	$Camera.zoom = Vector2(zoom_factor, zoom_factor)
 	
