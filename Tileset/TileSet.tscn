@@ -115,9 +115,29 @@ bounce = 0.0
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="SpikeBlockWhite" type="Sprite" parent="." index="5"]
+[node name="BlueBlock2" type="Sprite" parent="." index="5"]
 
-position = Vector2( 426.894, 1.58892 )
+position = Vector2( 434.992, 0.013196 )
+texture = ExtResource( 5 )
+
+[node name="BlueBlockStaticBody" type="StaticBody2D" parent="BlueBlock2" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlueBlock2/BlueBlockStaticBody" index="0"]
+
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="SpikeBlockWhite" type="Sprite" parent="." index="6"]
+
+position = Vector2( 515.339, 4.29642 )
 texture = ExtResource( 6 )
 
 [node name="SpikeBlockWhiteStaticBody" type="StaticBody2D" parent="SpikeBlockWhite" index="0"]
@@ -135,9 +155,9 @@ bounce = 0.0
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="SpikeBlockBlack" type="Sprite" parent="." index="6"]
+[node name="SpikeBlockBlack" type="Sprite" parent="." index="7"]
 
-position = Vector2( 512.597, 4.30974 )
+position = Vector2( 610.969, 1.60224 )
 texture = ExtResource( 7 )
 
 [node name="SpikeBlockBlackStaticBody" type="StaticBody2D" parent="SpikeBlockBlack" index="0"]

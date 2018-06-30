@@ -22,7 +22,8 @@ func color_name_to_tile_index(color_name):
 		"green": 1,
 		"white": 2,
 		"black": 3,
-		"blue": 4,
+		"blue_defect": 4, #do not remove 4 does not work somehow, Martin
+		"blue": 5,
 	}
 	return name_to_tile_mapping[color_name]
 
