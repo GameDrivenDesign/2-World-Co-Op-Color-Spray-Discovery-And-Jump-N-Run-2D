@@ -19,6 +19,7 @@ export (int) var movementVelocity = 100
 export (int) var jumpVelocity = 200
 export (String, "white", "black", "red", "magenta", \
 				"blue", "cyan", "green", "yellow") var startColor = "green"
+				
 
 var paintColor = Color(1.0, 0.0, 1.0) setget setPaintColor, getPaintColor
 
@@ -122,6 +123,7 @@ func _integrate_forces(state):
 	var velocity = Vector2(0, 0)
 	if (requestsJump() && onFloor()):
 		velocity += upDirection * jumpVelocity
+		$sounds/jump.play()
 	inputMovementDirection = movementDirectionFromInput()
 	velocity += inputMovementDirection * movementVelocity
 	state.linear_velocity += velocity

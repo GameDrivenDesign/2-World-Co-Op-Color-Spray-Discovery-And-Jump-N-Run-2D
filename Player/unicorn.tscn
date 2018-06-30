@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Player/unicorn.gd" type="Script" id=1]
 [ext_resource path="res://Player/unicorn/body.png" type="Texture" id=2]
 [ext_resource path="res://Player/unicorn/leg.png" type="Texture" id=3]
 [ext_resource path="res://Player/unicorn/tail.png" type="Texture" id=4]
 [ext_resource path="res://Player/unicorn/wing.png" type="Texture" id=5]
+[ext_resource path="res://Player/player_sounds.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -1025,7 +1026,7 @@ scale = 6.0
 scale_random = 0.2
 scale_curve = SubResource( 11 )
 color = Color( 0.265625, 1, 0, 1 )
-hue_variation = 1.49012e-008
+hue_variation = 1.49012e-08
 hue_variation_random = 1.0
 hue_variation_curve = SubResource( 9 )
 anim_speed = 0.0
@@ -1169,5 +1170,7 @@ normal_map = null
 h_frames = 1
 v_frames = 1
 _sections_unfolded = [ "Drawing", "Process Material", "Time", "Transform" ]
+
+[node name="sounds" parent="." index="2" instance=ExtResource( 6 )]
 
 
