@@ -7,7 +7,7 @@ var player1 = null
 var player2 = null
 
 const BEFORE_REACHING_SIDE_ZOOM_FACTOR = 1.5
-const MIN_ZOOM_FACTOR = 0.8
+const MIN_ZOOM_FACTOR = 1
 const MAX_ZOOM_FACTOR = 2.0
 
 func _ready():
