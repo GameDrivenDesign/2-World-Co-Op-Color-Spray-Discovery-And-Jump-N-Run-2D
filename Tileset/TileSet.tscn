@@ -97,7 +97,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="BlueBlock" type="Sprite" parent="." index="4"]
 
-position = Vector2( 330.307, 0.228569 )
+position = Vector2( 343.042, 0 )
 texture = ExtResource( 5 )
 
 [node name="BlueBlockStaticBody" type="StaticBody2D" parent="BlueBlock" index="0"]
