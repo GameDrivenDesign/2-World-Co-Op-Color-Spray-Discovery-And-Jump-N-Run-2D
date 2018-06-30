@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/happy.ogg-646c135293861eda5d267052cc28695d.oggstr"
+
+[deps]
+
+source_file="res://Audio/Music/happy.ogg"
+dest_files=[ "res://.import/happy.ogg-646c135293861eda5d267052cc28695d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
