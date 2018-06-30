@@ -97,7 +97,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="BlueBlock" type="Sprite" parent="." index="4"]
 
-position = Vector2( 448.66, 0.228569 )
+position = Vector2( 330.307, 0.228569 )
 texture = ExtResource( 5 )
 
 [node name="BlueBlockStaticBody" type="StaticBody2D" parent="BlueBlock" index="0"]
@@ -117,7 +117,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="SpikeBlockWhite" type="Sprite" parent="." index="5"]
 
-position = Vector2( 542.526, 0.228569 )
+position = Vector2( 426.894, 1.58892 )
 texture = ExtResource( 6 )
 
 [node name="SpikeBlockWhiteStaticBody" type="StaticBody2D" parent="SpikeBlockWhite" index="0"]
@@ -137,7 +137,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="SpikeBlockBlack" type="Sprite" parent="." index="6"]
 
-position = Vector2( 645.914, 1.58898 )
+position = Vector2( 512.597, 4.30974 )
 texture = ExtResource( 7 )
 
 [node name="SpikeBlockBlackStaticBody" type="StaticBody2D" parent="SpikeBlockBlack" index="0"]
