@@ -19,6 +19,7 @@ export (int) var movementVelocity = 100
 export (int) var jumpVelocity = 200
 export (String, "white", "black", "red", "magenta", \
 				"blue", "cyan", "green", "yellow") var startColor = "green"
+				
 
 var paintColor = Color(1.0, 0.0, 1.0) setget setPaintColor, getPaintColor
 
@@ -27,7 +28,7 @@ var inputMovementDirection
 var movementState = MovementState.STANDING
 var currentLinearVelocity
 
-const FLOOR_COLLISION_AVOIDANCE_DISTANCE = 0.1
+const STUCK_COLLISION_AVOIDANCE_DISTANCE = 0.1
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
@@ -56,6 +57,10 @@ func processAnimation():
 	else:
 		$Node2D.scale.x = -1
 	var nextMovementState = currentMovementState()
+	
+	if movementState == MovementState.FALLING && (nextMovementState == MovementState.STANDING || nextMovementState == MovementState.WALKING):
+		$sounds/landing.play()
+	
 	if movementState != nextMovementState:
 		movementState = nextMovementState
 		var animationName
@@ -103,6 +108,9 @@ func requestsJump():
 func onFloor():
 	return test_motion(-upDirection)
 	
+func onWall(direction):
+	return test_motion(direction)
+	
 func disposeColor():
 	if Input.is_action_pressed('player' + String(playerId) + '_crouch') and onFloor():
 		var map = get_node(mapPath)
@@ -126,19 +134,31 @@ func disposeColor():
 		var tileName = Colors.rgb_to_color_name(newColor).capitalize() + "Block"
 		var tileId = map.tile_set.find_tile_by_name(tileName)
 		map.set_cellv(tilePos, tileId)
+		if $sounds/stomp.get_playback_position() > 0.2 || !$sounds/stomp.playing:
+			$sounds/stomp.play()
 		
+
+func stuckAvoidance(state):
+	if onFloor():
+		state.transform.origin += upDirection * STUCK_COLLISION_AVOIDANCE_DISTANCE
+	elif onWall(Vector2(1, 0)):
+		state.linear_velocity.x = 0
+		state.transform.origin -= Vector2(1, 0) * STUCK_COLLISION_AVOIDANCE_DISTANCE
+	elif onWall(Vector2(-1, 0)):
+		state.linear_velocity.x = 0
+		state.transform.origin -= Vector2(-1, 0) * STUCK_COLLISION_AVOIDANCE_DISTANCE
 
 func _integrate_forces(state):
 	var velocity = Vector2(0, 0)
 	if (requestsJump() && onFloor()):
 		velocity += upDirection * jumpVelocity
+		$sounds/jump.play()
 	inputMovementDirection = movementDirectionFromInput()
 	velocity += inputMovementDirection * movementVelocity
 	state.linear_velocity += velocity
 	state.linear_velocity.x = clamp(state.linear_velocity.x, -movementVelocity, movementVelocity)
-	currentLinearVelocity = state.linear_velocity
-	if (onFloor()):
-		state.transform.origin += upDirection * FLOOR_COLLISION_AVOIDANCE_DISTANCE
+	stuckAvoidance(state)
+	currentLinearVelocity = state.linear_velocity	
 		
 func playerDies():
 	pass
