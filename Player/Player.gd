@@ -1,3 +1,4 @@
+tool
 extends RigidBody2D
 
 # class member variables go here, for example:
@@ -9,6 +10,7 @@ export (NodePath) var mapPath
 export (int) var playerId = 1
 export (int) var movementVelocity = 100
 export (int) var jumpVelocity = 200
+export (Color) var particlesColor setget setParticlesColor, getParticlesColor
 
 var upDirection
 
@@ -25,6 +27,18 @@ func _ready():
 
 func _process(delta):
 	disposeColor()
+
+func setParticlesColor(color):
+	particlesColor = color
+	
+	var colorStomp = $colorStomp
+	var colorParticles = $colorParticles
+	if colorStomp and colorParticles:
+		colorStomp.process_material.color = color
+		colorParticles.process_material.color = color
+
+func getParticlesColor():
+	return particlesColor
 
 func movementDirectionFromInput():
 	var direction = Vector2(0, 0)

@@ -971,7 +971,7 @@ _sections_unfolded = [ "Color", "Emission Shape", "Hue Variation" ]
 min_value = -1.0
 max_value = 1.0
 bake_resolution = 100
-_data = [ Vector2( 0, 0.0277122 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0149219 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.231934 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.00927734 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=8]
 
@@ -984,7 +984,7 @@ curve = SubResource( 7 )
 min_value = 0.0
 max_value = 1.0
 bake_resolution = 100
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.771793 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.583496 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=10]
 
@@ -1019,7 +1019,7 @@ damping = 0.0
 damping_random = 0.0
 angle = 0.0
 angle_random = 0.0
-scale = 5.0
+scale = 6.0
 scale_random = 0.2
 scale_curve = SubResource( 10 )
 color = Color( 0.265625, 1, 0, 1 )
@@ -1060,20 +1060,21 @@ angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
 _sections_unfolded = [ "Z Index" ]
+playerId = 1
+movementVelocity = 100
+jumpVelocity = 200
 particlesColor = Color( 0.265625, 1, 0, 1 )
 
 [node name="body" type="Sprite" parent="." index="0"]
 
-position = Vector2( 1.24181, -6.6331 )
-rotation = 0.0155823
-scale = Vector2( 0.985076, 0.95105 )
+position = Vector2( 1.2219, -35.4001 )
+scale = Vector2( 0.845094, 1.30529 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Region", "Transform" ]
 
 [node name="leg2" type="Sprite" parent="body" index="0"]
 
-position = Vector2( 7.324, 20.9875 )
-rotation = -0.266971
+position = Vector2( 6.32094, 21.085 )
 z_index = -1
 texture = ExtResource( 3 )
 offset = Vector2( 0.000543594, 1.81514 )
@@ -1082,7 +1083,6 @@ _sections_unfolded = [ "Transform", "Z Index" ]
 [node name="tail" type="Sprite" parent="body" index="1"]
 
 position = Vector2( -13.8029, 12.9191 )
-rotation = -0.0852332
 z_index = -1
 texture = ExtResource( 4 )
 offset = Vector2( -6.4446, 2.55807 )
@@ -1091,7 +1091,6 @@ _sections_unfolded = [ "Z Index" ]
 [node name="wing" type="Sprite" parent="body" index="2"]
 
 position = Vector2( -13.2413, -5.30461 )
-rotation = -0.196937
 z_index = -1
 texture = ExtResource( 5 )
 offset = Vector2( -8.90259, -3.33047 )
@@ -1099,8 +1098,7 @@ _sections_unfolded = [ "Z Index" ]
 
 [node name="leg" type="Sprite" parent="body" index="3"]
 
-position = Vector2( -8.50149, 21.2613 )
-rotation = 0.26035
+position = Vector2( -7.60866, 21.1075 )
 z_index = -1
 texture = ExtResource( 3 )
 offset = Vector2( -0.0698605, 1.79267 )
@@ -1123,7 +1121,7 @@ _sections_unfolded = [ "Playback Options" ]
 
 [node name="colorParticles" type="Particles2D" parent="." index="2"]
 
-position = Vector2( 0.226289, 14.4968 )
+position = Vector2( 0, -15.9106 )
 emitting = true
 amount = 8
 lifetime = 1.0
