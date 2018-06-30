@@ -1,11 +1,37 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Levels/Level0/Level0.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ColorBucket/ColorBucket.tscn" type="PackedScene" id=2]
 
 [node name="World" type="Node2D" index="0"]
 
 [node name="Level0" parent="." index="0" instance=ExtResource( 1 )]
 
 position = Vector2( 4.89093, 300.792 )
+
+[node name="ColorBucket" parent="." index="1" instance=ExtResource( 2 )]
+
+position = Vector2( 278.25, 121.189 )
+color = "black"
+
+[node name="ColorBucket2" parent="." index="2" instance=ExtResource( 2 )]
+
+position = Vector2( 386.549, 187.071 )
+color = "green"
+
+[node name="ColorBucket3" parent="." index="3" instance=ExtResource( 2 )]
+
+position = Vector2( 385.647, 14.6939 )
+color = "magenta"
+
+[node name="ColorBucket4" parent="." index="4" instance=ExtResource( 2 )]
+
+position = Vector2( 447.017, 122.994 )
+color = "yellow"
+
+[node name="ColorBucket5" parent="." index="5" instance=ExtResource( 2 )]
+
+position = Vector2( 643.762, 74.2589 )
+color = "red"
 
 
