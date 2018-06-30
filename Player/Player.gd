@@ -57,6 +57,10 @@ func processAnimation():
 	else:
 		$Node2D.scale.x = -1
 	var nextMovementState = currentMovementState()
+	
+	if movementState == MovementState.FALLING && (nextMovementState == MovementState.STANDING || nextMovementState == MovementState.WALKING):
+		$sounds/landing.play()
+	
 	if movementState != nextMovementState:
 		movementState = nextMovementState
 		var animationName
@@ -120,6 +124,8 @@ func disposeColor():
 		var tileName = Colors.rgb_to_color_name(currentColor).capitalize() + "Block"
 		var tileId = map.tile_set.find_tile_by_name(tileName)
 		map.set_cellv(tilePos, tileId)
+		if $sounds/stomp.get_playback_position() > 0.2 || !$sounds/stomp.playing:
+			$sounds/stomp.play()
 		
 
 func _integrate_forces(state):
