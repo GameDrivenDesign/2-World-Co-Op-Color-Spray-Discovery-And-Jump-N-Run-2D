@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Tileset/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Levels/GravityAreas.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Levels/Camera.tscn" type="PackedScene" id=4]
 
 [node name="Level0" type="Node2D" index="0"]
 
@@ -42,5 +43,7 @@ position = Vector2( 126.737, -121.9 )
 
 position = Vector2( 121.727, 105.245 )
 playerId = 2
+
+[node name="CameraCenter" parent="." index="4" instance=ExtResource( 4 )]
 
 
