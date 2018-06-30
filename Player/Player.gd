@@ -54,9 +54,7 @@ func processAnimation():
 	if inputMovementDirection.x > 0:
 		$Node2D.scale.x = 1
 	else:
-		$Node2D.scale.x = -1 
-	if playerId != 1:
-		return
+		$Node2D.scale.x = -1
 	var nextMovementState = currentMovementState()
 	if movementState != nextMovementState:
 		movementState = nextMovementState

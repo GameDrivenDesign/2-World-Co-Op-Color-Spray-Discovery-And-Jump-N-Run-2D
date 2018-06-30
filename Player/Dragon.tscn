@@ -1305,7 +1305,7 @@ mapPath = null
 playerId = 1
 movementVelocity = 100
 jumpVelocity = 200
-paintColor = Color( 1, 0, 1, 1 )
+startColor = "green"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
@@ -1337,7 +1337,7 @@ _sections_unfolded = [ "Playback Options" ]
 
 [node name="colorParticles" type="Particles2D" parent="Node2D" index="1"]
 
-position = Vector2( -0.387421, 21.9662 )
+position = Vector2( -0.387421, 23.2931 )
 emitting = true
 amount = 11
 lifetime = 1.0
@@ -1384,7 +1384,7 @@ _sections_unfolded = [ "Process Material", "Time", "Transform" ]
 
 [node name="body" type="Sprite" parent="Node2D" index="3"]
 
-position = Vector2( -0.601944, 3.76115 )
+position = Vector2( -0.381531, 3.71295 )
 texture = ExtResource( 2 )
 
 [node name="tail" type="Sprite" parent="Node2D/body" index="0"]
