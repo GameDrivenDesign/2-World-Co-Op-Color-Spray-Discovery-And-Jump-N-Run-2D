@@ -6,6 +6,6 @@
 
 [node name="Level0" parent="." index="0" instance=ExtResource( 1 )]
 
-position = Vector2( 4.89093, 300.792 )
+position = Vector2( 4.89093, 307.44 )
 
 
