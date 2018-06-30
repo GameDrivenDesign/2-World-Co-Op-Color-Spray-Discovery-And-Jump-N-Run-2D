@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Win/Win.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/IndieFlower.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Win/youwin.svg" type="Texture" id=3]
 [ext_resource path="res://Audio/Effects/win.wav" type="AudioStream" id=4]
-[ext_resource path="res://Player/unicorn.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Player/Dragon.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Player/unicorn.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -17,7 +18,7 @@ _sections_unfolded = [ "Font", "Settings" ]
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 100, 10 )
+extents = Vector2( 270, 10 )
 
 [node name="ColorRect" type="ColorRect" index="0"]
 
@@ -35,9 +36,9 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-color = Color( 0.65625, 0.0692139, 0.41318, 1 )
+color = Color( 0.65625, 0.0692139, 0.41318, 0 )
 script = ExtResource( 1 )
-_sections_unfolded = [ "Anchor", "Margin", "Rect" ]
+_sections_unfolded = [ "Anchor", "Margin", "Material", "Rect", "Visibility" ]
 
 [node name="Label" type="Label" parent="." index="0"]
 
@@ -69,8 +70,8 @@ _sections_unfolded = [ "Material", "Visibility", "custom_fonts", "custom_styles"
 
 [node name="youwin" type="Sprite" parent="." index="1"]
 
-position = Vector2( 464.562, 335.416 )
-scale = Vector2( 0.324917, 0.324917 )
+position = Vector2( 464.562, 335.529 )
+scale = Vector2( 0.0982884, 0.0982884 )
 texture = ExtResource( 3 )
 
 [node name="winSound" type="AudioStreamPlayer" parent="." index="2"]
@@ -82,13 +83,20 @@ autoplay = true
 mix_target = 0
 bus = "Master"
 
-[node name="unicorn" parent="." index="3" instance=ExtResource( 5 )]
+[node name="Dragon" parent="." index="3" instance=ExtResource( 5 )]
 
-position = Vector2( 640, 370 )
+position = Vector2( 272, 402 )
+winScreen = true
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." index="4"]
+[node name="unicorn" parent="." index="4" instance=ExtResource( 6 )]
 
-position = Vector2( 620, 480 )
+position = Vector2( 632, 412 )
+jumpVelocity = 400
+winScreen = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="5"]
+
+position = Vector2( 612, 492 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
@@ -99,7 +107,7 @@ bounce = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
 
-position = Vector2( 30, -50 )
+position = Vector2( -160, -50 )
 shape = SubResource( 2 )
 
 
