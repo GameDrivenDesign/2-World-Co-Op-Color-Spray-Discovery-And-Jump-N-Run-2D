@@ -17,7 +17,10 @@ export (NodePath) var mapPath
 export (int) var playerId = 1
 export (int) var movementVelocity = 100
 export (int) var jumpVelocity = 200
-export (Color) var paintColor = Color(1.0, 0.0, 1.0) setget setPaintColor, getPaintColor
+export (String, "white", "black", "red", "magenta", \
+				"blue", "cyan", "green", "yellow") var startColor = "green"
+
+var paintColor = Color(1.0, 0.0, 1.0) setget setPaintColor, getPaintColor
 
 var upDirection
 var inputMovementDirection
@@ -34,7 +37,7 @@ func _ready():
 	else:
 		upDirection = Vector2(0, 1)
 	add_to_group("player")
-	
+	setPaintColor(Colors.color_name_to_rgb(startColor))
 
 func currentMovementState():
 	if onFloor():
