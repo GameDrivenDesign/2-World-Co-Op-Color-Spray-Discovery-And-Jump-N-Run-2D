@@ -4,6 +4,8 @@ extends RigidBody2D
 # var a = 2
 # var b = "textvar"
 
+export (NodePath) var mapPath
+
 export (int) var playerId = 1
 export (int) var movementVelocity = 100
 export (int) var jumpVelocity = 200
@@ -20,10 +22,8 @@ func _ready():
 	else:
 		upDirection = Vector2(0, 1)
 
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+func _process(delta):
+	disposeColor()
 
 func movementDirectionFromInput():
 	var direction = Vector2(0, 0)
@@ -38,6 +38,16 @@ func requestsJump():
 
 func onFloor():
 	return test_motion(-upDirection)
+	
+func disposeColor():
+	if Input.is_action_pressed('player' + String(playerId) + '_crouch') and onFloor():
+		var map = get_node(mapPath)
+		var playerPos = position
+		var playerExt = get_node("CollisionShape2D").shape.extents
+		var tilePoint = playerPos + Vector2(0, -upDirection.y * playerExt.y -upDirection.y)
+		var tilePos = map.world_to_map(tilePoint)
+		var currentTileIndex = map.get_cellv(tilePos)
+		map.set_cellv(tilePos, 1)
 
 func _integrate_forces(state):
 	var velocity = Vector2(0, 0)
