@@ -48,6 +48,7 @@ playerId = 2
 
 position = Vector2( 110.232, -126.934 )
 mode = 2
+mapPath = NodePath("../TileMap")
 playerId = 1
 movementVelocity = 100
 jumpVelocity = 200
