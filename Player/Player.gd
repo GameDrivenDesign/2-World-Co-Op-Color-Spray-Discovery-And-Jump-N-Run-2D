@@ -1,3 +1,4 @@
+tool
 extends RigidBody2D
 
 # class member variables go here, for example:
@@ -11,9 +12,12 @@ enum MovementState {
 	FALLING
 }
 
+export (NodePath) var mapPath
+
 export (int) var playerId = 1
 export (int) var movementVelocity = 100
 export (int) var jumpVelocity = 200
+export (Color) var particlesColor setget setParticlesColor, getParticlesColor
 
 var upDirection
 var inputMovementDirection
@@ -42,7 +46,7 @@ func currentMovementState():
 	else:
 		return MovementState.FALLING
 
-func _process(delta):
+func processAnimation():
 	if playerId != 1:
 		return
 	var nextMovementState = currentMovementState()
@@ -61,6 +65,21 @@ func _process(delta):
 		$AnimationPlayer.play(animationName)
 			
 
+func _process(delta):
+	processAnimation()
+	disposeColor()
+
+func setParticlesColor(color):
+	particlesColor = color
+	
+	var colorStomp = $colorStomp
+	var colorParticles = $colorParticles
+	if colorStomp and colorParticles:
+		colorStomp.process_material.color = color
+		colorParticles.process_material.color = color
+
+func getParticlesColor():
+	return particlesColor
 
 func movementDirectionFromInput():
 	var direction = Vector2(0, 0)
@@ -75,6 +94,16 @@ func requestsJump():
 
 func onFloor():
 	return test_motion(-upDirection)
+	
+func disposeColor():
+	if Input.is_action_pressed('player' + String(playerId) + '_crouch') and onFloor():
+		var map = get_node(mapPath)
+		var playerPos = position
+		var playerExt = get_node("CollisionShape2D").shape.extents
+		var tilePoint = playerPos + Vector2(0, -upDirection.y * playerExt.y -upDirection.y)
+		var tilePos = map.world_to_map(tilePoint)
+		var currentTileIndex = map.get_cellv(tilePos)
+		map.set_cellv(tilePos, 1)
 
 func _integrate_forces(state):
 	var velocity = Vector2(0, 0)
@@ -87,5 +116,8 @@ func _integrate_forces(state):
 	currentLinearVelocity = state.linear_velocity
 	if (onFloor()):
 		state.transform.origin += upDirection * FLOOR_COLLISION_AVOIDANCE_DISTANCE
+		
+func playerDies():
+	
 	
 	
