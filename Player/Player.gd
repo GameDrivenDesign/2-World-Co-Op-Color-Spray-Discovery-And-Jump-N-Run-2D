@@ -216,13 +216,11 @@ func _integrate_forces(state):
 func checkSpikes():
 	var map = get_node(mapPath)
 	var playerPos = position
-	var direction = 0
-	if playerID == "dragon":
-		direction = -1
 	var playerExt = get_node("CollisionShape2D").shape.extents
-	var tilePoint = playerPos + Vector2(0, -upDirection.y * playerExt.y -upDirection.y + direction)
+	var verticalHalfTileExtent = map.cell_size.y * 0.5
+	var playerBottomPosition = playerPos + Vector2(0, -upDirection.y * playerExt.y)
+	var tilePoint = playerBottomPosition + Vector2(0, -upDirection.y * verticalHalfTileExtent)
 	var tilePos = map.world_to_map(tilePoint)
-	tilePos.y += direction
 	var val = map.get_cellv(tilePos)
 	if val == 8 or val == 7:
 		isAlive = false
