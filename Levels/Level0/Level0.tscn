@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Tileset/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Levels/GravityAreas.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Levels/Camera.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Player/unicorn.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ColorBucket/ColorBucket.tscn" type="PackedScene" id=6]
 
 [node name="Level0" type="Node2D" index="0"]
 
@@ -49,5 +50,15 @@ mode = 2
 playerId = 1
 movementVelocity = 100
 jumpVelocity = 200
+
+[node name="ColorBucket" parent="." index="5" instance=ExtResource( 6 )]
+
+position = Vector2( 282.583, -185.887 )
+color = "green"
+
+[node name="ColorBucket2" parent="." index="6" instance=ExtResource( 6 )]
+
+position = Vector2( 434.737, -134.194 )
+color = "yellow"
 
 
