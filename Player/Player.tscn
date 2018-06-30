@@ -29,9 +29,6 @@ angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Linear", "Pickable", "Transform", "collision" ]
-playerId = 1
-movementVelocity = 200
-jumpVelocity = 300
 
 [node name="Polygon2D" type="Polygon2D" parent="." index="0"]
 
