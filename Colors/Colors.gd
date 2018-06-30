@@ -13,19 +13,22 @@ const colors = {
 	"magenta": Color(1.0, 0.0, 1.0),
 }
 
+const color_to_tile_index = {
+	colors["red"]: 0,
+	colors["green"]: 1,
+	colors["white"]: 2,
+	colors["black"]: 3,
+	colors["yellow"]: 4,
+	colors["magenta"]: 5,
+	colors["cyan"]: 6,
+	colors["blue"]: 7
+}	
+
 func color_name_to_rgb(color_name):
 	return colors[color_name]
 	
-func color_name_to_tile_index(color_name):
-	var name_to_tile_mapping = {
-		"red": 0,
-		"green": 1,
-		"white": 2,
-		"black": 3,
-		"blue_defect": 4, #do not remove 4 does not work somehow, Martin
-		"blue": 5,
-	}
-	return name_to_tile_mapping[color_name]
+func color_name_to_tile_index(color):
+	return color_to_tile_index[color]
 
 func rgb_to_color_name(rgb):
 	for color_name in colors:

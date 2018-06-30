@@ -17,7 +17,10 @@ export (NodePath) var mapPath
 export (int) var playerId = 1
 export (int) var movementVelocity = 100
 export (int) var jumpVelocity = 200
-export (Color) var paintColor = Color(1.0, 0.0, 1.0) setget setPaintColor, getPaintColor
+export (String, "white", "black", "red", "magenta", \
+				"blue", "cyan", "green", "yellow") var startColor = "green"
+
+var paintColor = Color(1.0, 0.0, 1.0) setget setPaintColor, getPaintColor
 
 var upDirection
 var inputMovementDirection
@@ -34,7 +37,7 @@ func _ready():
 	else:
 		upDirection = Vector2(0, 1)
 	add_to_group("player")
-	
+	setPaintColor(Colors.color_name_to_rgb(startColor))
 
 func currentMovementState():
 	if onFloor():
@@ -48,8 +51,10 @@ func currentMovementState():
 		return MovementState.FALLING
 
 func processAnimation():
-	if playerId != 1:
-		return
+	if inputMovementDirection.x > 0:
+		$Node2D.scale.x = 1
+	else:
+		$Node2D.scale.x = -1
 	var nextMovementState = currentMovementState()
 	if movementState != nextMovementState:
 		movementState = nextMovementState
@@ -63,7 +68,7 @@ func processAnimation():
 				animationName = "jumping"
 			MovementState.FALLING:
 				animationName = "falling"
-		$AnimationPlayer.play(animationName)
+		$Node2D/AnimationPlayer.play(animationName)
 			
 
 func _process(delta):
@@ -75,8 +80,8 @@ func setPaintColor(inputColor):
 	setParticlesColor(inputColor)
 
 func setParticlesColor(inputColor):
-	var colorStomp = $colorStomp
-	var colorParticles = $colorParticles
+	var colorStomp = $Node2D/colorStomp
+	var colorParticles = $Node2D/colorParticles
 	if colorStomp and colorParticles:
 		colorStomp.process_material.color = inputColor
 		colorParticles.process_material.color = inputColor
@@ -101,12 +106,16 @@ func onFloor():
 func disposeColor():
 	if Input.is_action_pressed('player' + String(playerId) + '_crouch') and onFloor():
 		var map = get_node(mapPath)
-		var playerPos = position
-		var playerExt = get_node("CollisionShape2D").shape.extents
-		var tilePoint = playerPos + Vector2(0, -upDirection.y * playerExt.y -upDirection.y)
+		var colPos = $CollisionShape2D.position
+		var pos = position
+		var playerPos = position + $CollisionShape2D.position
+		var playerExt = $CollisionShape2D.shape.extents
+		var verticalHalfTileExtent = map.cell_size.y * 0.5
+		var playerBottomPosition = playerPos + Vector2(0, -upDirection.y * playerExt.y)
+		var tilePoint = playerBottomPosition + Vector2(0, -upDirection.y * verticalHalfTileExtent)
 		var tilePos = map.world_to_map(tilePoint)
 		var currentTileIndex = map.get_cellv(tilePos)
-		map.set_cellv(tilePos, Colors.color_name_to_tile_index("blue"))
+		map.set_cellv(tilePos, Colors.color_name_to_tile_index(getPaintColor()))
 		
 
 func _integrate_forces(state):
