@@ -19,6 +19,7 @@ func _ready():
 		upDirection = Vector2(0, -1)
 	else:
 		upDirection = Vector2(0, 1)
+	
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

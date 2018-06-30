@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Player/dragon/body.png" type="Texture" id=1]
-[ext_resource path="res://Player/dragon/tail.png" type="Texture" id=2]
-[ext_resource path="res://Player/dragon/leg.png" type="Texture" id=3]
-[ext_resource path="res://Player/dragon/wing.png" type="Texture" id=4]
+[ext_resource path="res://Player/Dragon.gd" type="Script" id=1]
+[ext_resource path="res://Player/dragon/body.png" type="Texture" id=2]
+[ext_resource path="res://Player/dragon/tail.png" type="Texture" id=3]
+[ext_resource path="res://Player/dragon/leg.png" type="Texture" id=4]
+[ext_resource path="res://Player/dragon/wing.png" type="Texture" id=5]
 
 [sub_resource type="Animation" id=1]
 
@@ -405,20 +406,24 @@ linear_velocity = Vector2( 0, 0 )
 linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
+script = ExtResource( 1 )
+playerId = 1
+movementVelocity = 100
+jumpVelocity = 200
 
 [node name="body" type="Sprite" parent="." index="0"]
 
 position = Vector2( -0.00588319, 3.10754 )
 rotation = 0.00508814
 scale = Vector2( 1.01533, 0.925507 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="tail" type="Sprite" parent="body" index="0"]
 
 position = Vector2( -14.1272, 9.62279 )
 rotation = 0.0555607
 z_index = -1
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 offset = Vector2( -7.1443, -1.19162 )
 _sections_unfolded = [ "Z Index" ]
 
@@ -426,14 +431,14 @@ _sections_unfolded = [ "Z Index" ]
 
 position = Vector2( -6.6953, 14.6776 )
 rotation = 0.0289944
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 offset = Vector2( 0.0273056, 2.73913 )
 
 [node name="leg3" type="Sprite" parent="body" index="2"]
 
 position = Vector2( 7.30468, 14.6517 )
 rotation = -0.0195383
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 offset = Vector2( 0.0273056, 2.73913 )
 
 [node name="wing" type="Sprite" parent="body" index="3"]
@@ -441,7 +446,7 @@ offset = Vector2( 0.0273056, 2.73913 )
 position = Vector2( -11.8982, -13.5771 )
 rotation = 0.339566
 z_index = -1
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 offset = Vector2( -9.53489, -2.66117 )
 _sections_unfolded = [ "Z Index" ]
 
