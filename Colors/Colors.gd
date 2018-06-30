@@ -19,9 +19,9 @@ const color_to_tile_index = {
 	colors["white"]: 2,
 	colors["black"]: 3,
 	colors["yellow"]: 4,
-	colors["magenta"]: 5,
+	colors["magenta"]: 7,
 	colors["cyan"]: 6,
-	colors["blue"]: 7
+	colors["blue"]: 5
 }	
 
 func color_name_to_rgb(color_name):
