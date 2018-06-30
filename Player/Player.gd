@@ -70,13 +70,19 @@ func processAnimation():
 		$Node2D.scale.x = 1
 	else:
 		$Node2D.scale.x = -1
+	
+	if lastovementState == MovementState.FALLING && (movementState == MovementState.STANDING || movementState == MovementState.WALKING):
+		$sounds/landing.play()
+	
 	if movementState != lastMovementState:
+		movementState = nextMovementState
 		var animationName
 		match movementState:
 			MovementState.STANDING:
 				animationName = "standing"
 			MovementState.WALKING:
 				animationName = "walking"
+				$sounds/walking.play()
 			MovementState.JUMPING:
 				animationName = "jumping"
 			MovementState.FALLING:
@@ -84,7 +90,8 @@ func processAnimation():
 			MovementState.STOMPING:
 				animationName = "stomping"
 		$Node2D/AnimationPlayer.play(animationName)
-			
+	if movementState == MovementState.WALKING && !$sounds/walking.playing:
+		$sounds/walking.play()
 
 func _process(delta):
 	updateMovementState()
@@ -133,14 +140,22 @@ func queueTint():
 	var tilePoint = playerBottomPosition + Vector2(0, -upDirection.y * verticalHalfTileExtent)
 	var tilePos = map.world_to_map(tilePoint)
 	var currentTileIndex = 0
-	var currentColor = getPaintColor()
-	var tileName = Colors.rgb_to_color_name(currentColor).capitalize() + "Block"
+	var is_additive = tilePos.y >= 0
+	var currentTileName = map.tile_set.tile_get_name(map.get_cellv(tilePos))
+	var currentTileColorName = currentTileName.split("Block")[0].to_lower()
+	var newColor
+	if is_additive:
+		newColor = Colors.mix_additive_rgb(Colors.color_name_to_rgb(currentTileColorName), getPaintColor())
+	else:
+		newColor = Colors.mix_subtractive_rgb(Colors.color_name_to_rgb(currentTileColorName), getPaintColor())
+	var tileName = Colors.rgb_to_color_name(newColor).capitalize() + "Block"
 	var tileId = map.tile_set.find_tile_by_name(tileName)
 	blockTintQueue.append([TINT_DELAY, tilePos, tileId])
 	
 func disposeColor(delta):
 	if movementState == MovementState.STOMPING and movementState != lastMovementState:
 		queueTint()
+		$sounds/stomp.play()
 	
 	var newTintQueue = []
 	for element in blockTintQueue:
@@ -150,7 +165,6 @@ func disposeColor(delta):
 		else:
 			newTintQueue.append(element)
 	blockTintQueue = newTintQueue
-
 
 func stuckAvoidance(state):
 	if onFloor():
