@@ -48,6 +48,10 @@ func currentMovementState():
 		return MovementState.FALLING
 
 func processAnimation():
+	if inputMovementDirection.x > 0:
+		$Node2D.scale.x = 1
+	else:
+		$Node2D.scale.x = -1 
 	if playerId != 1:
 		return
 	var nextMovementState = currentMovementState()
@@ -63,7 +67,7 @@ func processAnimation():
 				animationName = "jumping"
 			MovementState.FALLING:
 				animationName = "falling"
-		$AnimationPlayer.play(animationName)
+		$'Node2D/AnimationPlayer'.play(animationName)
 			
 
 func _process(delta):

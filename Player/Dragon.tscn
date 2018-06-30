@@ -6,9 +6,13 @@
 [ext_resource path="res://Player/dragon/leg.png" type="Texture" id=4]
 [ext_resource path="res://Player/dragon/wing.png" type="Texture" id=5]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="RectangleShape2D" id=1]
 
-resource_name = "falling"
+custom_solver_bias = 0.0
+extents = Vector2( 15.4891, 14.0574 )
+
+[sub_resource type="Animation" id=2]
+
 length = 1.0
 loop = false
 step = 0.01
@@ -205,9 +209,8 @@ tracks/15/keys = {
 "values": [ Vector2( -1.71426, -21.8195 ), Vector2( -0.387421, -13.1951 ), Vector2( -0.387421, -1.25352 ), Vector2( -0.387421, 9.36121 ), Vector2( -0.387421, 21.9662 ) ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 
-resource_name = "jumping"
 length = 1.0
 loop = true
 step = 0.01
@@ -404,9 +407,8 @@ tracks/15/keys = {
 "values": [ Vector2( 0.939423, 14.0052 ), Vector2( 0.939423, 7.37099 ), Vector2( 0.939423, -2.58031 ), Vector2( -1.05084, -6.56084 ), Vector2( -0.387421, -9.87795 ), Vector2( -0.387421, -15.1853 ), Vector2( -1.05084, -23.1464 ), Vector2( -1.05084, -27.1269 ), Vector2( -1.71426, -21.8195 ), Vector2( -0.387421, -13.1951 ), Vector2( -0.387421, -1.25352 ), Vector2( -0.387421, 9.36121 ), Vector2( -0.387421, 21.9662 ) ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 
-resource_name = "jumping"
 length = 1.0
 loop = false
 step = 0.01
@@ -591,7 +593,7 @@ tracks/14/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 
 length = 1.0
 loop = false
@@ -777,7 +779,7 @@ tracks/14/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 
 length = 1.0
 loop = false
@@ -987,7 +989,7 @@ tracks/16/keys = {
 "values": [ false, true, false ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 
 length = 1.0
 loop = true
@@ -1185,12 +1187,7 @@ tracks/15/keys = {
 "values": [ Vector2( -1.45515, 14.982 ), Vector2( -1.45515, 11.0098 ), Vector2( -1.05794, 20.1457 ), Vector2( -1.05794, 22.9262 ), Vector2( -0.660721, 24.5151 ), Vector2( -1.45515, 24.5151 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=11]
-
-custom_solver_bias = 0.0
-extents = Vector2( 15.4891, 14.0574 )
-
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticlesMaterial" id=8]
 
 render_priority = 0
 trail_divisor = 1
@@ -1229,20 +1226,20 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Color", "Gravity", "Hue Variation", "Initial Velocity", "Scale", "Spread" ]
 
-[sub_resource type="Curve" id=8]
+[sub_resource type="Curve" id=9]
 
 min_value = 0.0
 max_value = 1.0
 bake_resolution = 100
 _data = [ Vector2( 0, 1 ), 0.0, 0.509702, 0, 0, Vector2( 0.997977, 0.613254 ), -0.630148, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=9]
+[sub_resource type="CurveTexture" id=10]
 
 flags = 4
 width = 2048
-curve = SubResource( 8 )
+curve = SubResource( 9 )
 
-[sub_resource type="ParticlesMaterial" id=10]
+[sub_resource type="ParticlesMaterial" id=11]
 
 render_priority = 0
 trail_divisor = 1
@@ -1271,7 +1268,7 @@ angle = 0.0
 angle_random = 0.0
 scale = 5.0
 scale_random = 0.3
-scale_curve = SubResource( 9 )
+scale_curve = SubResource( 10 )
 color = Color( 1, 0.585938, 0, 1 )
 hue_variation = 0.1
 hue_variation_random = 1.0
@@ -1310,65 +1307,35 @@ movementVelocity = 100
 jumpVelocity = 200
 paintColor = Color( 1, 0, 1, 1 )
 
-[node name="body" type="Sprite" parent="." index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
-position = Vector2( -0.601944, 3.76115 )
-texture = ExtResource( 2 )
+position = Vector2( 0, -5.32238 )
+scale = Vector2( 1, 1.38891 )
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
-[node name="tail" type="Sprite" parent="body" index="0"]
+[node name="Node2D" type="Node2D" parent="." index="1"]
 
-position = Vector2( -14.1272, 9.62279 )
-rotation = -0.0226172
-z_index = -1
-texture = ExtResource( 3 )
-offset = Vector2( -7.1443, -1.19162 )
-_sections_unfolded = [ "Z Index" ]
+scale = Vector2( 1, -1 )
+_sections_unfolded = [ "Transform" ]
 
-[node name="leg2" type="Sprite" parent="body" index="1"]
-
-position = Vector2( -6.6953, 14.6776 )
-texture = ExtResource( 4 )
-offset = Vector2( 0.0273056, 2.73913 )
-
-[node name="leg3" type="Sprite" parent="body" index="2"]
-
-position = Vector2( 7.30468, 14.6517 )
-rotation = -0.00185464
-texture = ExtResource( 4 )
-offset = Vector2( 0.0273056, 2.73913 )
-
-[node name="wing" type="Sprite" parent="body" index="3"]
-
-position = Vector2( -11.8982, -13.5771 )
-rotation = 0.153574
-z_index = -1
-texture = ExtResource( 5 )
-offset = Vector2( -9.53489, -2.66117 )
-_sections_unfolded = [ "Z Index" ]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D" index="0"]
 
 root_node = NodePath("..")
 autoplay = ""
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.25
-anims/falling = SubResource( 1 )
-anims/jumping = SubResource( 2 )
-"anims/jumping (copy)" = SubResource( 3 )
-anims/standing = SubResource( 4 )
-anims/stomping = SubResource( 5 )
-anims/walking = SubResource( 6 )
+anims/falling = SubResource( 2 )
+anims/jumping = SubResource( 3 )
+"anims/jumping (copy)" = SubResource( 4 )
+anims/standing = SubResource( 5 )
+anims/stomping = SubResource( 6 )
+anims/walking = SubResource( 7 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
-
-position = Vector2( -0.562241, 4.67763 )
-scale = Vector2( 1, 1.38891 )
-shape = SubResource( 11 )
-
-[node name="colorParticles" type="Particles2D" parent="." index="3"]
+[node name="colorParticles" type="Particles2D" parent="Node2D" index="1"]
 
 position = Vector2( -0.387421, 21.9662 )
 emitting = true
@@ -1384,14 +1351,14 @@ fract_delta = true
 visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = false
 draw_order = 0
-process_material = SubResource( 7 )
+process_material = SubResource( 8 )
 texture = null
 normal_map = null
 h_frames = 1
 v_frames = 1
 _sections_unfolded = [ "Process Material", "Time" ]
 
-[node name="colorStomp" type="Particles2D" parent="." index="4"]
+[node name="colorStomp" type="Particles2D" parent="Node2D" index="2"]
 
 position = Vector2( 0.310753, 23.2055 )
 rotation = -1.5708
@@ -1408,11 +1375,47 @@ fract_delta = true
 visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = false
 draw_order = 0
-process_material = SubResource( 10 )
+process_material = SubResource( 11 )
 texture = null
 normal_map = null
 h_frames = 1
 v_frames = 1
 _sections_unfolded = [ "Process Material", "Time", "Transform" ]
+
+[node name="body" type="Sprite" parent="Node2D" index="3"]
+
+position = Vector2( -0.601944, 3.76115 )
+texture = ExtResource( 2 )
+
+[node name="tail" type="Sprite" parent="Node2D/body" index="0"]
+
+position = Vector2( -14.1272, 9.62279 )
+rotation = -0.0226172
+z_index = -1
+texture = ExtResource( 3 )
+offset = Vector2( -7.1443, -1.19162 )
+_sections_unfolded = [ "Z Index" ]
+
+[node name="leg2" type="Sprite" parent="Node2D/body" index="1"]
+
+position = Vector2( -6.6953, 14.6776 )
+texture = ExtResource( 4 )
+offset = Vector2( 0.0273056, 2.73913 )
+
+[node name="leg3" type="Sprite" parent="Node2D/body" index="2"]
+
+position = Vector2( 7.30468, 14.6517 )
+rotation = -0.00185464
+texture = ExtResource( 4 )
+offset = Vector2( 0.0273056, 2.73913 )
+
+[node name="wing" type="Sprite" parent="Node2D/body" index="3"]
+
+position = Vector2( -11.8982, -13.5771 )
+rotation = 0.153574
+z_index = -1
+texture = ExtResource( 5 )
+offset = Vector2( -9.53489, -2.66117 )
+_sections_unfolded = [ "Z Index" ]
 
 
