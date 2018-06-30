@@ -108,9 +108,13 @@ func onFloor():
 func disposeColor():
 	if Input.is_action_pressed('player' + String(playerId) + '_crouch') and onFloor():
 		var map = get_node(mapPath)
-		var playerPos = position
-		var playerExt = get_node("CollisionShape2D").shape.extents
-		var tilePoint = playerPos + Vector2(0, -upDirection.y * playerExt.y -upDirection.y)
+		var colPos = $CollisionShape2D.position
+		var pos = position
+		var playerPos = position + $CollisionShape2D.position
+		var playerExt = $CollisionShape2D.shape.extents
+		var verticalHalfTileExtent = map.cell_size.y * 0.5
+		var playerBottomPosition = playerPos + Vector2(0, -upDirection.y * playerExt.y)
+		var tilePoint = playerBottomPosition + Vector2(0, -upDirection.y * verticalHalfTileExtent)
 		var tilePos = map.world_to_map(tilePoint)
 		var currentTileIndex = map.get_cellv(tilePos)
 		map.set_cellv(tilePos, Colors.color_name_to_tile_index("blue"))
