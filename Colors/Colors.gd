@@ -43,14 +43,14 @@ func mix_additive_rgb(color1, color2):
 	return Color(
 		min(1.0, color1.r + color2.r), 
 		min(1.0, color1.g + color2.g),
-		min(1,0, color1.b + color2.b)
+		min(1.0, color1.b + color2.b)
 	)
 
 func mix_subtractive_rgb(color1, color2):
 	return Color(
 		max(0.0, color1.r - color2.r), 
 		max(0.0, color1.g - color2.g),
-		max(0,0, color1.b - color2.b)
+		max(0.0, color1.b - color2.b)
 	)
 	
 func mix_additive_name(color1, color2):
