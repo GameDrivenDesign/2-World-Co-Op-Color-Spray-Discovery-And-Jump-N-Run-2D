@@ -124,9 +124,7 @@ func disposeColor():
 func correctMovementAccordingToViewport(movementFromInput):
 	var posRelativeToViewportX = get_global_transform_with_canvas().get_origin().x
 	if(posRelativeToViewportX < marginToScreenWidth and movementFromInput.x < 0) or (posRelativeToViewportX > screenDims.x - marginToScreenWidth and movementFromInput.x > 0):
-		print(movementFromInput)
 		movementFromInput.x = 0 # stop moving to far to one side
-		print("limit reached")
 	return movementFromInput
 	
 
