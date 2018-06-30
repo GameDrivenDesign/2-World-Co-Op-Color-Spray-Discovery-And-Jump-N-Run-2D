@@ -216,11 +216,12 @@ bounce = 0.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpikeBlockWhite/SpikeBlockWhiteStaticBody" index="0"]
 
 shape = SubResource( 1 )
+script = ExtResource( 7 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="SpikeBlockBlack" type="Sprite" parent="." index="10"]
 
-position = Vector2( 75.1136, 86.1626 )
+position = Vector2( 610.969, 1.60224 )
 texture = ExtResource( 10 )
 
 [node name="SpikeBlockBlackStaticBody" type="StaticBody2D" parent="SpikeBlockBlack" index="0"]
@@ -236,6 +237,7 @@ bounce = 0.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpikeBlockBlack/SpikeBlockBlackStaticBody" index="0"]
 
 shape = SubResource( 1 )
+script = ExtResource( 7 )
 _sections_unfolded = [ "Transform" ]
 
 

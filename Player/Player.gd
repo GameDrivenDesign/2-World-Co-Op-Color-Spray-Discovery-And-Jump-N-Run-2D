@@ -5,6 +5,7 @@ extends RigidBody2D
 # var a = 2
 # var b = "textvar"
 
+
 enum MovementState {
 	STANDING,
 	WALKING,
@@ -17,6 +18,7 @@ export (NodePath) var mapPath
 export (int) var playerId = 1
 export (int) var movementVelocity = 100
 export (int) var jumpVelocity = 200
+export (bool) var isAlive = true
 export (String, "white", "black", "red", "magenta", \
 				"blue", "cyan", "green", "yellow") var startColor = "green"
 				
@@ -30,6 +32,9 @@ var currentLinearVelocity
 var screenDims = OS.get_real_window_size()
 const marginToScreenWidth = 50
 
+var playerID
+
+const FLOOR_COLLISION_AVOIDANCE_DISTANCE = 0.1
 const STUCK_COLLISION_AVOIDANCE_DISTANCE = 0.1
 
 func _ready():
@@ -83,6 +88,7 @@ func processAnimation():
 func _process(delta):
 	processAnimation()
 	disposeColor()
+	checkSpikes()
 
 func setPaintColor(inputColor):
 	paintColor = inputColor
@@ -182,7 +188,40 @@ func _integrate_forces(state):
 	stuckAvoidance(state)
 	currentLinearVelocity = state.linear_velocity	
 		
+func checkSpikes():
+	var map = get_node(mapPath)
+	var playerPos = position
+	var direction = 0
+	if playerID == "dragon":
+		direction = -1
+	var playerExt = get_node("CollisionShape2D").shape.extents
+	var tilePoint = playerPos + Vector2(0, -upDirection.y * playerExt.y -upDirection.y + direction)
+	var tilePos = map.world_to_map(tilePoint)
+	tilePos.y += direction
+	var val = map.get_cellv(tilePos)
+	if val == 8 or val == 7:
+		isAlive = false
+		print("player died")
+		playerDies()
+
+var dead = false
 func playerDies():
-	pass
+	if dead:
+		return
+	dead = true
 	
+	# Remove the current level
+	var root = get_tree().get_root()
+	var world = root.get_node("World")
+	var level = world.get_node("Level0")
+	root.remove_child(level)
+	level.call_deferred("free")
+	var unicornLive = self.get_parent().get_node("Player1").isAlive
+	var dragonLive = self.get_parent().get_node("Player2").isAlive
+
+	# Add the next level
+	var gameOver = load("res://GameOver/ColorRect.tscn").instance()
+	gameOver.test(dragonLive, unicornLive)
+	root.add_child(gameOver)
 	
+	#get_tree().current_scene.replace_by(gameOver)
