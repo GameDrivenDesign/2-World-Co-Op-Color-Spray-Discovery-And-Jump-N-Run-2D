@@ -14,10 +14,11 @@
 custom_solver_bias = 0.0
 extents = Vector2( 25, 25 )
 
-[node name="TileSet" type="Node" index="0"]
+[node name="TileSet" type="Node"]
 
 [node name="RedBlock" type="Sprite" parent="." index="0"]
 
+position = Vector2( -2.72076, 2.7207 )
 texture = ExtResource( 1 )
 
 [node name="RedBlockStaticBody" type="StaticBody2D" parent="RedBlock" index="0"]

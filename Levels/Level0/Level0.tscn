@@ -30,6 +30,7 @@ _sections_unfolded = [ "Cell" ]
 
 [node name="Floor" parent="." index="1" instance=ExtResource( 2 )]
 
+visible = false
 scale = Vector2( 1000, 1 )
 _sections_unfolded = [ "Collision", "Material", "Transform", "Visibility" ]
 
