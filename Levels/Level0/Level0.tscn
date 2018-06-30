@@ -39,6 +39,7 @@ _sections_unfolded = [ "Collision", "Material", "Transform", "Visibility" ]
 [node name="Player2" parent="." index="2" instance=ExtResource( 3 )]
 
 position = Vector2( 121.727, 105.245 )
+mapPath = NodePath("../TileMap")
 playerId = 2
 
 [node name="CameraCenter" parent="." index="3" instance=ExtResource( 4 )]
@@ -47,6 +48,7 @@ playerId = 2
 
 position = Vector2( 110.232, -126.934 )
 mode = 2
+mapPath = NodePath("../TileMap")
 playerId = 1
 movementVelocity = 100
 jumpVelocity = 200
