@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Tileset/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Levels/GravityAreas.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Levels/Camera.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Player/unicorn.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ColorBucket/ColorBucket.tscn" type="PackedScene" id=6]
 
 [node name="Level0" type="Node2D" index="0"]
 
@@ -34,15 +36,29 @@ visible = false
 scale = Vector2( 1000, 1 )
 _sections_unfolded = [ "Collision", "Material", "Transform", "Visibility" ]
 
-[node name="Player1" parent="." index="2" instance=ExtResource( 3 )]
-
-position = Vector2( 126.737, -121.9 )
-
-[node name="Player2" parent="." index="3" instance=ExtResource( 3 )]
+[node name="Player2" parent="." index="2" instance=ExtResource( 3 )]
 
 position = Vector2( 121.727, 105.245 )
 playerId = 2
 
-[node name="CameraCenter" parent="." index="4" instance=ExtResource( 4 )]
+[node name="CameraCenter" parent="." index="3" instance=ExtResource( 4 )]
+
+[node name="Player1" parent="." index="4" instance=ExtResource( 5 )]
+
+position = Vector2( 110.232, -126.934 )
+mode = 2
+playerId = 1
+movementVelocity = 100
+jumpVelocity = 200
+
+[node name="ColorBucket" parent="." index="5" instance=ExtResource( 6 )]
+
+position = Vector2( 282.583, -185.887 )
+color = "green"
+
+[node name="ColorBucket2" parent="." index="6" instance=ExtResource( 6 )]
+
+position = Vector2( 434.737, -134.194 )
+color = "yellow"
 
 

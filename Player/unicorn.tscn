@@ -1060,9 +1060,6 @@ angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
 _sections_unfolded = [ "Z Index" ]
-playerId = 1
-movementVelocity = 100
-jumpVelocity = 200
 particlesColor = Color( 0.265625, 1, 0, 1 )
 
 [node name="body" type="Sprite" parent="." index="0"]
