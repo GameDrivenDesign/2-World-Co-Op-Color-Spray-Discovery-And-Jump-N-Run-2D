@@ -26,6 +26,8 @@ var upDirection
 var inputMovementDirection
 var movementState = MovementState.STANDING
 var currentLinearVelocity
+var screenDims = OS.get_real_window_size()
+const marginToScreenWidth = 50
 
 const FLOOR_COLLISION_AVOIDANCE_DISTANCE = 0.1
 
@@ -118,13 +120,21 @@ func disposeColor():
 		var tilePos = map.world_to_map(tilePoint)
 		var currentTileIndex = map.get_cellv(tilePos)
 		map.set_cellv(tilePos, Colors.color_name_to_tile_index("blue"))
-		
+
+func correctMovementAccordingToViewport(movementFromInput):
+	var posRelativeToViewportX = get_global_transform_with_canvas().get_origin().x
+	if(posRelativeToViewportX < marginToScreenWidth and movementFromInput.x < 0) or (posRelativeToViewportX > screenDims.x - marginToScreenWidth and movementFromInput.x > 0):
+		print(movementFromInput)
+		movementFromInput.x = 0 # stop moving to far to one side
+		print("limit reached")
+	return movementFromInput
+	
 
 func _integrate_forces(state):
 	var velocity = Vector2(0, 0)
 	if (requestsJump() && onFloor()):
 		velocity += upDirection * jumpVelocity
-	inputMovementDirection = movementDirectionFromInput()
+	inputMovementDirection = correctMovementAccordingToViewport(movementDirectionFromInput())
 	velocity += inputMovementDirection * movementVelocity
 	state.linear_velocity += velocity
 	state.linear_velocity.x = clamp(state.linear_velocity.x, -movementVelocity, movementVelocity)
