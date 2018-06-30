@@ -70,7 +70,7 @@ func processAnimation():
 				animationName = "jumping"
 			MovementState.FALLING:
 				animationName = "falling"
-		$'Node2D/AnimationPlayer'.play(animationName)
+		$Node2D/AnimationPlayer.play(animationName)
 			
 
 func _process(delta):
@@ -82,8 +82,8 @@ func setPaintColor(inputColor):
 	setParticlesColor(inputColor)
 
 func setParticlesColor(inputColor):
-	var colorStomp = $colorStomp
-	var colorParticles = $colorParticles
+	var colorStomp = $Node2D/colorStomp
+	var colorParticles = $Node2D/colorParticles
 	if colorStomp and colorParticles:
 		colorStomp.process_material.color = inputColor
 		colorParticles.process_material.color = inputColor
