@@ -117,7 +117,7 @@ func disposeColor():
 		var tilePoint = playerBottomPosition + Vector2(0, -upDirection.y * verticalHalfTileExtent)
 		var tilePos = map.world_to_map(tilePoint)
 		var currentTileIndex = map.get_cellv(tilePos)
-		map.set_cellv(tilePos, Colors.color_name_to_tile_index("blue"))
+		map.set_cellv(tilePos, Colors.color_name_to_tile_index(getPaintColor()))
 		
 
 func _integrate_forces(state):
