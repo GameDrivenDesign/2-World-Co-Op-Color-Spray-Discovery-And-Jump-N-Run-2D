@@ -61,7 +61,8 @@ func processAnimation():
 	var nextMovementState = currentMovementState()
 	
 	if movementState == MovementState.FALLING && (nextMovementState == MovementState.STANDING || nextMovementState == MovementState.WALKING):
-		$sounds/landing.play()
+		#$sounds/landing.play()
+		pass
 	
 	if movementState != nextMovementState:
 		movementState = nextMovementState
