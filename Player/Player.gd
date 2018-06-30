@@ -9,7 +9,8 @@ enum MovementState {
 	STANDING,
 	WALKING,
 	JUMPING,
-	FALLING
+	FALLING,
+	STOMPING
 }
 
 export (NodePath) var mapPath
@@ -26,7 +27,11 @@ var paintColor = Color(1.0, 0.0, 1.0) setget setPaintColor, getPaintColor
 var upDirection
 var inputMovementDirection
 var movementState = MovementState.STANDING
+var lastMovementState = MovementState.STANDING
 var currentLinearVelocity
+
+var blockTintQueue = []
+const TINT_DELAY = 0.7
 
 const STUCK_COLLISION_AVOIDANCE_DISTANCE = 0.1
 
@@ -41,9 +46,14 @@ func _ready():
 	setPaintColor(Colors.color_name_to_rgb(startColor))
 
 func currentMovementState():
+	if movementState == MovementState.STOMPING and $Node2D/AnimationPlayer.is_playing():
+		return MovementState.STOMPING
 	if onFloor():
 		if inputMovementDirection == Vector2(0, 0):
-			return MovementState.STANDING
+			if Input.is_action_pressed('player' + String(playerId) + '_crouch'):
+				return MovementState.STOMPING
+			else:
+				return MovementState.STANDING
 		else:
 			return MovementState.WALKING
 	elif currentLinearVelocity.y * upDirection.y > 0:
@@ -51,14 +61,16 @@ func currentMovementState():
 	else:
 		return MovementState.FALLING
 
+func updateMovementState():
+	lastMovementState = movementState
+	movementState = currentMovementState()
+
 func processAnimation():
 	if inputMovementDirection.x > 0:
 		$Node2D.scale.x = 1
 	else:
 		$Node2D.scale.x = -1
-	var nextMovementState = currentMovementState()
-	if movementState != nextMovementState:
-		movementState = nextMovementState
+	if movementState != lastMovementState:
 		var animationName
 		match movementState:
 			MovementState.STANDING:
@@ -69,12 +81,15 @@ func processAnimation():
 				animationName = "jumping"
 			MovementState.FALLING:
 				animationName = "falling"
+			MovementState.STOMPING:
+				animationName = "stomping"
 		$Node2D/AnimationPlayer.play(animationName)
 			
 
 func _process(delta):
+	updateMovementState()
 	processAnimation()
-	disposeColor()
+	disposeColor(delta)
 
 func setPaintColor(inputColor):
 	paintColor = inputColor
@@ -107,23 +122,35 @@ func onFloor():
 func onWall(direction):
 	return test_motion(direction)
 	
-func disposeColor():
-	if Input.is_action_pressed('player' + String(playerId) + '_crouch') and onFloor():
-		var map = get_node(mapPath)
-		var colPos = $CollisionShape2D.position
-		var pos = position
-		var playerPos = position + $CollisionShape2D.position
-		var playerExt = $CollisionShape2D.shape.extents
-		var verticalHalfTileExtent = map.cell_size.y * 0.5
-		var playerBottomPosition = playerPos + Vector2(0, -upDirection.y * playerExt.y)
-		var tilePoint = playerBottomPosition + Vector2(0, -upDirection.y * verticalHalfTileExtent)
-		var tilePos = map.world_to_map(tilePoint)
-		var currentTileIndex = 0
-		var currentColor = getPaintColor()
-		var tileName = Colors.rgb_to_color_name(currentColor).capitalize() + "Block"
-		var tileId = map.tile_set.find_tile_by_name(tileName)
-		map.set_cellv(tilePos, tileId)
-		
+func queueTint():
+	var map = get_node(mapPath)
+	var colPos = $CollisionShape2D.position
+	var pos = position
+	var playerPos = position + $CollisionShape2D.position
+	var playerExt = $CollisionShape2D.shape.extents
+	var verticalHalfTileExtent = map.cell_size.y * 0.5
+	var playerBottomPosition = playerPos + Vector2(0, -upDirection.y * playerExt.y)
+	var tilePoint = playerBottomPosition + Vector2(0, -upDirection.y * verticalHalfTileExtent)
+	var tilePos = map.world_to_map(tilePoint)
+	var currentTileIndex = 0
+	var currentColor = getPaintColor()
+	var tileName = Colors.rgb_to_color_name(currentColor).capitalize() + "Block"
+	var tileId = map.tile_set.find_tile_by_name(tileName)
+	blockTintQueue.append([TINT_DELAY, tilePos, tileId])
+	
+func disposeColor(delta):
+	if movementState == MovementState.STOMPING and movementState != lastMovementState:
+		queueTint()
+	
+	var newTintQueue = []
+	for element in blockTintQueue:
+		element[0] -= delta
+		if element[0] < 0:
+			get_node(mapPath).set_cellv(element[1], element[2])
+		else:
+			newTintQueue.append(element)
+	blockTintQueue = newTintQueue
+
 
 func stuckAvoidance(state):
 	if onFloor():
@@ -136,6 +163,8 @@ func stuckAvoidance(state):
 		state.transform.origin -= Vector2(-1, 0) * STUCK_COLLISION_AVOIDANCE_DISTANCE
 
 func _integrate_forces(state):
+	if movementState == MovementState.STOMPING:
+		return
 	var velocity = Vector2(0, 0)
 	if (requestsJump() && onFloor()):
 		velocity += upDirection * jumpVelocity
