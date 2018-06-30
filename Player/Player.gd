@@ -189,6 +189,13 @@ func _integrate_forces(state):
 	currentLinearVelocity = state.linear_velocity	
 		
 func checkSpikes():
+	var val = checkBlock()
+	if val == 8 or val == 7:
+		isAlive = false
+		print("player died")
+		playerDies()
+		
+func checkBlock():
 	var map = get_node(mapPath)
 	var playerPos = position
 	var direction = 0
@@ -198,11 +205,8 @@ func checkSpikes():
 	var tilePoint = playerPos + Vector2(0, -upDirection.y * playerExt.y -upDirection.y + direction)
 	var tilePos = map.world_to_map(tilePoint)
 	tilePos.y += direction
-	var val = map.get_cellv(tilePos)
-	if val == 8 or val == 7:
-		isAlive = false
-		print("player died")
-		playerDies()
+	return map.get_cellv(tilePos)
+	
 
 var dead = false
 func playerDies():
