@@ -15,6 +15,16 @@ const colors = {
 
 func color_name_to_rgb(color_name):
 	return colors[color_name]
+	
+func color_name_to_tile_index(color_name):
+	var name_to_tile_mapping = {
+		"red": 0,
+		"green": 1,
+		"white": 2,
+		"black": 3,
+		"blue": 4,
+	}
+	return name_to_tile_mapping[color_name]
 
 func rgb_to_color_name(rgb):
 	for color_name in colors:
