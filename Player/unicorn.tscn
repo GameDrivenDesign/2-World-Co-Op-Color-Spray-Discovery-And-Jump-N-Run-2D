@@ -1023,7 +1023,7 @@ scale = 6.0
 scale_random = 0.2
 scale_curve = SubResource( 10 )
 color = Color( 0.265625, 1, 0, 1 )
-hue_variation = 1.49012e-08
+hue_variation = 1.49012e-008
 hue_variation_random = 1.0
 hue_variation_curve = SubResource( 8 )
 anim_speed = 0.0
@@ -1060,6 +1060,7 @@ angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
 _sections_unfolded = [ "Z Index" ]
+mapPath = null
 playerId = 1
 movementVelocity = 100
 jumpVelocity = 200
@@ -1168,6 +1169,8 @@ _sections_unfolded = [ "Drawing", "Process Material", "Time", "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="4"]
 
+position = Vector2( 0.379627, -25.5451 )
+scale = Vector2( 0.957465, 1.28698 )
 shape = SubResource( 12 )
 
 
