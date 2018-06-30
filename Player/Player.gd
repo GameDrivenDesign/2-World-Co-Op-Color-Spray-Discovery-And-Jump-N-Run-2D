@@ -76,14 +76,14 @@ func processAnimation():
 				animationName = "standing"
 			MovementState.WALKING:
 				animationName = "walking"
-				$sounds/common/walking.play()
+				$sounds/walking.play()
 			MovementState.JUMPING:
 				animationName = "jumping"
 			MovementState.FALLING:
 				animationName = "falling"
 		$Node2D/AnimationPlayer.play(animationName)
-	if movementState == MovementState.WALKING && !$sounds/common/walking.playing:
-		$sounds/common/walking.play()
+	if movementState == MovementState.WALKING && !$sounds/walking.playing:
+		$sounds/walking.play()
 
 func _process(delta):
 	processAnimation()

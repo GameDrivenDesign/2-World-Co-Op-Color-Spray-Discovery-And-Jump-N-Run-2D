@@ -5,10 +5,7 @@
 [ext_resource path="res://Player/unicorn/leg.png" type="Texture" id=3]
 [ext_resource path="res://Player/unicorn/tail.png" type="Texture" id=4]
 [ext_resource path="res://Player/unicorn/wing.png" type="Texture" id=5]
-[ext_resource path="res://Audio/Effects/player_sounds.tscn" type="PackedScene" id=6]
-
-
-
+[ext_resource path="res://Audio/Effects/player_sounds_unicorn.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -1065,6 +1062,7 @@ mapPath = null
 playerId = 1
 movementVelocity = 100
 jumpVelocity = 200
+isAlive = true
 startColor = "green"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]

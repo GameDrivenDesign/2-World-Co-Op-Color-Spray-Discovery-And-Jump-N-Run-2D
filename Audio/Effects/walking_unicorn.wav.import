@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/walking_unicorn.wav-2ba4f72714fd8588fbb2d714bd2a68e7.sample"
+
+[deps]
+
+source_file="res://Audio/Effects/walking_unicorn.wav"
+dest_files=[ "res://.import/walking_unicorn.wav-2ba4f72714fd8588fbb2d714bd2a68e7.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
