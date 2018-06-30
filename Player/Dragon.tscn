@@ -407,9 +407,11 @@ linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
+mapPath = null
 playerId = 1
 movementVelocity = 100
 jumpVelocity = 200
+particlesColor = null
 
 [node name="body" type="Sprite" parent="." index="0"]
 
@@ -462,7 +464,7 @@ anims/stomp = SubResource( 2 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 
-[node name="CollisionArea" type="CollisionShape2D" parent="." index="2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
 
 position = Vector2( 0.137062, 4.67763 )
 scale = Vector2( 1, 1.38891 )

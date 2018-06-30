@@ -118,6 +118,6 @@ func _integrate_forces(state):
 		state.transform.origin += upDirection * FLOOR_COLLISION_AVOIDANCE_DISTANCE
 		
 func playerDies():
-	
+	pass
 	
 	
