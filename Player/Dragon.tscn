@@ -943,7 +943,7 @@ tracks/14/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1, 0.484814 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
 }
 tracks/15/type = "value"
-tracks/15/path = NodePath("colorParticles:position")
+tracks/15/path = NodePath("Node2D/colorParticles:position")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/imported = false
@@ -955,7 +955,7 @@ tracks/15/keys = {
 "values": [ Vector2( -0.387421, 23.2931 ), Vector2( -0.387421, 13.2931 ), Vector2( -0.387421, 23.2931 ), Vector2( -0.387421, 23.2931 ) ]
 }
 tracks/16/type = "value"
-tracks/16/path = NodePath("colorStomp:emitting")
+tracks/16/path = NodePath("Node2D/colorStomp:emitting")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/imported = false
@@ -1153,7 +1153,7 @@ tracks/14/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1, 0.484814 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
 }
 tracks/15/type = "value"
-tracks/15/path = NodePath("colorParticles:position")
+tracks/15/path = NodePath("Node2D/colorParticles:position")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/imported = false
@@ -1262,7 +1262,7 @@ _sections_unfolded = [ "Angle", "Color", "Damping", "Gravity", "Hue Variation", 
 custom_solver_bias = 0.0
 extents = Vector2( 15.4891, 14.0574 )
 
-[node name="Dragon" type="RigidBody2D"]
+[node name="Dragon" type="RigidBody2D" index="0"]
 
 position = Vector2( 0.387421, -3.2931 )
 input_pickable = false
@@ -1288,6 +1288,7 @@ mapPath = null
 playerId = 1
 movementVelocity = 100
 jumpVelocity = 200
+isAlive = true
 startColor = "green"
 
 [node name="Node2D" type="Node2D" parent="." index="0"]

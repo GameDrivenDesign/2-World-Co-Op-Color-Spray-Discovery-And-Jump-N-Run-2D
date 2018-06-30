@@ -39,4 +39,5 @@ player2_crouch=[ Object(InputEventKey,"resource_local_to_scene":false,"resource_
 
 [rendering]
 
+environment/default_clear_color=Color( 0.902344, 0.902344, 0.902344, 1 )
 environment/default_environment="res://default_env.tres"
