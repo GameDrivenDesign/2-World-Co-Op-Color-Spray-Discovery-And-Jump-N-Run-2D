@@ -17,7 +17,7 @@ export (NodePath) var mapPath
 export (int) var playerId = 1
 export (int) var movementVelocity = 100
 export (int) var jumpVelocity = 200
-export (Color) var particlesColor setget setParticlesColor, getParticlesColor
+export (Color) var paintColor = Color(1.0, 0.0, 1.0) setget setPaintColor, getPaintColor
 
 var upDirection
 var inputMovementDirection
@@ -33,6 +33,7 @@ func _ready():
 		upDirection = Vector2(0, -1)
 	else:
 		upDirection = Vector2(0, 1)
+	add_to_group("player")
 	
 
 func currentMovementState():
@@ -69,17 +70,19 @@ func _process(delta):
 	processAnimation()
 	disposeColor()
 
-func setParticlesColor(color):
-	particlesColor = color
-	
+func setPaintColor(inputColor):
+	paintColor = inputColor
+	setParticlesColor(inputColor)
+
+func setParticlesColor(inputColor):
 	var colorStomp = $colorStomp
 	var colorParticles = $colorParticles
 	if colorStomp and colorParticles:
-		colorStomp.process_material.color = color
-		colorParticles.process_material.color = color
+		colorStomp.process_material.color = inputColor
+		colorParticles.process_material.color = inputColor
 
-func getParticlesColor():
-	return particlesColor
+func getPaintColor():
+	return paintColor
 
 func movementDirectionFromInput():
 	var direction = Vector2(0, 0)
