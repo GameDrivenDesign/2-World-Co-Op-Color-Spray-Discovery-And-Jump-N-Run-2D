@@ -1,25 +1,46 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Audio/Effects/jump.wav" type="AudioStream" id=1]
+[ext_resource path="res://Audio/Effects/walking.wav" type="AudioStream" id=1]
+[ext_resource path="res://Audio/Effects/jump.wav" type="AudioStream" id=2]
+[ext_resource path="res://Audio/Effects/landing.wav" type="AudioStream" id=3]
+[ext_resource path="res://Audio/Effects/stomp.wav" type="AudioStream" id=4]
 
-[node name="sounds" type="Node"]
+[node name="sounds" type="Node" index="0"]
 
 [node name="walking" type="AudioStreamPlayer" parent="." index="0"]
-
-stream = null
-volume_db = 0.0
-pitch_scale = 1.0
-autoplay = false
-mix_target = 0
-bus = "Master"
-
-[node name="jump" type="AudioStreamPlayer" parent="." index="1"]
 
 stream = ExtResource( 1 )
 volume_db = 0.0
 pitch_scale = 1.0
 autoplay = false
 mix_target = 0
-bus = "Master"
+bus = "effects"
+
+[node name="jump" type="AudioStreamPlayer" parent="." index="1"]
+
+stream = ExtResource( 2 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "effects"
+
+[node name="landing" type="AudioStreamPlayer" parent="." index="2"]
+
+stream = ExtResource( 3 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "effects"
+
+[node name="stomp" type="AudioStreamPlayer" parent="." index="3"]
+
+stream = ExtResource( 4 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "effects"
 
 
