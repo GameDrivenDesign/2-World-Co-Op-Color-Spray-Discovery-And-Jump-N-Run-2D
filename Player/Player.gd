@@ -59,7 +59,7 @@ func processAnimation():
 	var nextMovementState = currentMovementState()
 	
 	if movementState == MovementState.FALLING && (nextMovementState == MovementState.STANDING || nextMovementState == MovementState.WALKING):
-		$sounds/landing.play()
+		$sounds/common/landing.play()
 	
 	if movementState != nextMovementState:
 		movementState = nextMovementState
@@ -69,14 +69,14 @@ func processAnimation():
 				animationName = "standing"
 			MovementState.WALKING:
 				animationName = "walking"
-				$sounds/walking.play()
+				$sounds/common/walking.play()
 			MovementState.JUMPING:
 				animationName = "jumping"
 			MovementState.FALLING:
 				animationName = "falling"
 		$Node2D/AnimationPlayer.play(animationName)
-	if movementState == MovementState.WALKING && !$sounds/walking.playing:
-		$sounds/walking.play()
+	if movementState == MovementState.WALKING && !$sounds/common/walking.playing:
+		$sounds/common/walking.play()
 
 func _process(delta):
 	processAnimation()
@@ -146,8 +146,8 @@ func disposeColor():
 		var tilePoint = playerBottomPosition + Vector2(0, -upDirection.y * verticalHalfTileExtent)
 		var tilePos = map.world_to_map(tilePoint)
 		paintBlock(tilePos)
-		if $sounds/stomp.get_playback_position() > 0.2 || !$sounds/stomp.playing:
-			$sounds/stomp.play()
+		if $sounds/common/stomp.get_playback_position() > 0.2 || !$sounds/common/stomp.playing:
+			$sounds/common/stomp.play()
 		
 
 func stuckAvoidance(state):
@@ -164,7 +164,7 @@ func _integrate_forces(state):
 	var velocity = Vector2(0, 0)
 	if (requestsJump() && onFloor()):
 		velocity += upDirection * jumpVelocity
-		$sounds/jump.play()
+		$sounds/common/jump.play()
 	inputMovementDirection = movementDirectionFromInput()
 	velocity += inputMovementDirection * movementVelocity
 	state.linear_velocity += velocity
