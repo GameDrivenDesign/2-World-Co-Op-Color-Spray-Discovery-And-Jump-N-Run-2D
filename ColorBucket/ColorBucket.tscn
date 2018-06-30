@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ColorBucket/ColorBucket.gd" type="Script" id=1]
+[ext_resource path="res://Assets/color_bucket.png" type="Texture" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 18.8037
+height = 12.3563
+
+[node name="ColorBucket" type="Node2D" index="0"]
+
+script = ExtResource( 1 )
+colorName = "cyan"
+
+[node name="Polygon2D" type="Polygon2D" parent="." index="0"]
+
+polygon = PoolVector2Array( 6.11322, -21.6996, -5.03566, -21.8839, -10.1494, -20.0872, -13.5586, -18.9815, -14.9867, -17.9219, -16.0463, -15.8027, -16.9677, -13.7296, -16.5992, -11.9328, -8.21448, -1.61322, 10.3516, -1.7975, 15.1429, -11.6564, 17.1239, -13.0846, 16.0643, -16.0791, 13.0237, -18.7051, 9.47631, -20.5479 )
+uv = PoolVector2Array(  )
+color = Color( 1, 0.703125, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+
+texture = ExtResource( 2 )
+
+[node name="CollisionArea" type="Area2D" parent="." index="2"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="Collision" type="CollisionShape2D" parent="CollisionArea" index="0"]
+
+position = Vector2( 0, -0.524475 )
+shape = SubResource( 1 )
+
+[connection signal="body_entered" from="CollisionArea" to="." method="_on_CollisionArea_body_entered"]
+
+
