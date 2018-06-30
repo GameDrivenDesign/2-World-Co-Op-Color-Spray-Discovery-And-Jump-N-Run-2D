@@ -49,5 +49,8 @@ func _integrate_forces(state):
 	state.linear_velocity.x = clamp(state.linear_velocity.x, -movementVelocity, movementVelocity)
 	if (onFloor()):
 		state.transform.origin += upDirection * FLOOR_COLLISION_AVOIDANCE_DISTANCE
+		
+func playerDies():
+	
 	
 	
