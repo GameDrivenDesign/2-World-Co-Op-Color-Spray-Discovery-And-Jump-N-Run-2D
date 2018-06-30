@@ -1309,14 +1309,12 @@ paintColor = Color( 1, 0, 1, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
-position = Vector2( 0, -5.32238 )
 scale = Vector2( 1, 1.38891 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Node2D" type="Node2D" parent="." index="1"]
 
-scale = Vector2( 1, -1 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D" index="0"]
@@ -1384,7 +1382,7 @@ _sections_unfolded = [ "Process Material", "Time", "Transform" ]
 
 [node name="body" type="Sprite" parent="Node2D" index="3"]
 
-position = Vector2( -0.601944, 3.76115 )
+position = Vector2( 0.172905, -1.08164 )
 texture = ExtResource( 2 )
 
 [node name="tail" type="Sprite" parent="Node2D/body" index="0"]
