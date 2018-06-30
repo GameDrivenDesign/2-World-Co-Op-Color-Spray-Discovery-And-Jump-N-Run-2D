@@ -1,5 +1,5 @@
 tool
-extends KinematicBody2D
+extends "res://Player/Player.gd"
 
 export (Color) var particlesColor setget setParticlesColor, getParticlesColor
 
