@@ -149,4 +149,18 @@ extents = Vector2( 25, 25 )
 "shape": SubResource( 1 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 25, 25 )
 } ]
+9/name = "BlueBlock2"
+9/texture = ExtResource( 5 )
+9/tex_offset = Vector2( 0, 0 )
+9/modulate = Color( 1, 1, 1, 1 )
+9/region = Rect2( 0, 0, 50, 50 )
+9/is_autotile = false
+9/occluder_offset = Vector2( 25, 25 )
+9/navigation_offset = Vector2( 25, 25 )
+9/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"shape": SubResource( 1 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 25, 25 )
+} ]
 

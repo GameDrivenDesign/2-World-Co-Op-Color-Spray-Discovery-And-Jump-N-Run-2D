@@ -107,6 +107,7 @@ func disposeColor():
 		var tilePos = map.world_to_map(tilePoint)
 		var currentTileIndex = map.get_cellv(tilePos)
 		map.set_cellv(tilePos, Colors.color_name_to_tile_index("blue"))
+		
 
 func _integrate_forces(state):
 	var velocity = Vector2(0, 0)
