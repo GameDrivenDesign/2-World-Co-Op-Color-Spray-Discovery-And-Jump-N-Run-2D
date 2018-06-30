@@ -501,7 +501,7 @@ tracks/14/keys = {
 [sub_resource type="Animation" id=5]
 
 length = 1.8
-loop = true
+loop = false
 step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Node2D/body:position")
