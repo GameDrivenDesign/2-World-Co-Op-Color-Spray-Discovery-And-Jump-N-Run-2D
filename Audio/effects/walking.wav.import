@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/walking.wav-4667c39c56d19ef11d93ec969e0bcbb6.sample"
+path="res://.import/walking.wav-8c371e712c7df0d5d38dac401776bdf3.sample"
 
 [deps]
 
-source_file="res://audio/effects/walking.wav"
-dest_files=[ "res://.import/walking.wav-4667c39c56d19ef11d93ec969e0bcbb6.sample" ]
+source_file="res://Audio/effects/walking.wav"
+dest_files=[ "res://.import/walking.wav-8c371e712c7df0d5d38dac401776bdf3.sample" ]
 
 [params]
 
