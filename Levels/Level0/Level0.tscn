@@ -43,16 +43,17 @@ _sections_unfolded = [ "Collision", "Material", "Transform", "Visibility" ]
 position = Vector2( 110.232, -126.934 )
 mode = 2
 mapPath = NodePath("../TileMap")
-paintColor = Color( 1, 0, 1, 1 )
 isAlive = true
+startColor = "green"
 
 [node name="ColorBucket" parent="." index="4" instance=ExtResource( 5 )]
 
-position = Vector2( 282.583, -185.887 )
+position = Vector2( 283.071, -101.519 )
 
 [node name="ColorBucket2" parent="." index="5" instance=ExtResource( 5 )]
 
-position = Vector2( 434.737, -134.194 )
+position = Vector2( 427.422, -102.008 )
+colorName = "red"
 
 [node name="Player2" parent="." index="6" instance=ExtResource( 6 )]
 
@@ -61,5 +62,6 @@ mode = 2
 mapPath = NodePath("../TileMap")
 playerId = 2
 isAlive = true
+startColor = "cyan"
 
 
