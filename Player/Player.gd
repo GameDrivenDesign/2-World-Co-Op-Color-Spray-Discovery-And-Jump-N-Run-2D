@@ -5,6 +5,7 @@ extends RigidBody2D
 # var a = 2
 # var b = "textvar"
 
+
 enum MovementState {
 	STANDING,
 	WALKING,
@@ -18,6 +19,7 @@ export (NodePath) var mapPath
 export (int) var playerId = 1
 export (int) var movementVelocity = 100
 export (int) var jumpVelocity = 200
+export (bool) var isAlive = true
 export (String, "white", "black", "red", "magenta", \
 				"blue", "cyan", "green", "yellow") var startColor = "green"
 				
@@ -29,10 +31,13 @@ var inputMovementDirection
 var movementState = MovementState.STANDING
 var lastMovementState = MovementState.STANDING
 var currentLinearVelocity
+var screenDims = OS.get_real_window_size()
+const marginToScreenWidth = 50
+
+var playerID
 
 var blockTintQueue = []
 const TINT_DELAY = 0.7
-
 const STUCK_COLLISION_AVOIDANCE_DISTANCE = 0.1
 
 func _ready():
@@ -71,11 +76,10 @@ func processAnimation():
 	else:
 		$Node2D.scale.x = -1
 	
-	if lastovementState == MovementState.FALLING && (movementState == MovementState.STANDING || movementState == MovementState.WALKING):
+	if lastMovementState == MovementState.FALLING && (movementState == MovementState.STANDING || movementState == MovementState.WALKING):
 		$sounds/landing.play()
 	
 	if movementState != lastMovementState:
-		movementState = nextMovementState
 		var animationName
 		match movementState:
 			MovementState.STANDING:
@@ -97,6 +101,7 @@ func _process(delta):
 	updateMovementState()
 	processAnimation()
 	disposeColor(delta)
+	checkSpikes()
 
 func setPaintColor(inputColor):
 	paintColor = inputColor
@@ -139,18 +144,27 @@ func queueTint():
 	var playerBottomPosition = playerPos + Vector2(0, -upDirection.y * playerExt.y)
 	var tilePoint = playerBottomPosition + Vector2(0, -upDirection.y * verticalHalfTileExtent)
 	var tilePos = map.world_to_map(tilePoint)
+	queuePaintBlock(tilePos)
+
+func queuePaintBlock(tilePos):
+	var map = get_node(mapPath)
 	var currentTileIndex = 0
 	var is_additive = tilePos.y >= 0
 	var currentTileName = map.tile_set.tile_get_name(map.get_cellv(tilePos))
 	var currentTileColorName = currentTileName.split("Block")[0].to_lower()
-	var newColor
+	var newColor = getPaintColor()	
 	if is_additive:
 		newColor = Colors.mix_additive_rgb(Colors.color_name_to_rgb(currentTileColorName), getPaintColor())
 	else:
 		newColor = Colors.mix_subtractive_rgb(Colors.color_name_to_rgb(currentTileColorName), getPaintColor())
-	var tileName = Colors.rgb_to_color_name(newColor).capitalize() + "Block"
-	var tileId = map.tile_set.find_tile_by_name(tileName)
-	blockTintQueue.append([TINT_DELAY, tilePos, tileId])
+	if newColor == Colors.color_name_to_rgb(currentTileColorName):
+		var newTilePos = tilePos - upDirection
+		if map.get_cellv(newTilePos) != -1:
+			queuePaintBlock(newTilePos)
+	else:			
+		var tileName = Colors.rgb_to_color_name(newColor).capitalize() + "Block"
+		var tileId = map.tile_set.find_tile_by_name(tileName)
+		blockTintQueue.append([TINT_DELAY, tilePos, tileId])
 	
 func disposeColor(delta):
 	if movementState == MovementState.STOMPING and movementState != lastMovementState:
@@ -165,7 +179,13 @@ func disposeColor(delta):
 		else:
 			newTintQueue.append(element)
 	blockTintQueue = newTintQueue
-
+		
+func correctMovementAccordingToViewport(movementFromInput):
+	var posRelativeToViewportX = get_global_transform_with_canvas().get_origin().x
+	if(posRelativeToViewportX < marginToScreenWidth and movementFromInput.x < 0) or (posRelativeToViewportX > screenDims.x - marginToScreenWidth and movementFromInput.x > 0):
+		movementFromInput.x = 0 # stop moving to far to one side
+	return movementFromInput
+	
 func stuckAvoidance(state):
 	if onFloor():
 		state.transform.origin += upDirection * STUCK_COLLISION_AVOIDANCE_DISTANCE
@@ -183,14 +203,47 @@ func _integrate_forces(state):
 	if (requestsJump() && onFloor()):
 		velocity += upDirection * jumpVelocity
 		$sounds/jump.play()
-	inputMovementDirection = movementDirectionFromInput()
+	inputMovementDirection = correctMovementAccordingToViewport(movementDirectionFromInput())
 	velocity += inputMovementDirection * movementVelocity
 	state.linear_velocity += velocity
 	state.linear_velocity.x = clamp(state.linear_velocity.x, -movementVelocity, movementVelocity)
 	stuckAvoidance(state)
 	currentLinearVelocity = state.linear_velocity	
 		
+func checkSpikes():
+	var map = get_node(mapPath)
+	var playerPos = position
+	var direction = 0
+	if playerID == "dragon":
+		direction = -1
+	var playerExt = get_node("CollisionShape2D").shape.extents
+	var tilePoint = playerPos + Vector2(0, -upDirection.y * playerExt.y -upDirection.y + direction)
+	var tilePos = map.world_to_map(tilePoint)
+	tilePos.y += direction
+	var val = map.get_cellv(tilePos)
+	if val == 8 or val == 7:
+		isAlive = false
+		print("player died")
+		playerDies()
+
+var dead = false
 func playerDies():
-	pass
+	if dead:
+		return
+	dead = true
 	
+	# Remove the current level
+	var root = get_tree().get_root()
+	var world = root.get_node("World")
+	var level = world.get_node("Level0")
+	root.remove_child(level)
+	level.call_deferred("free")
+	var unicornLive = self.get_parent().get_node("Player1").isAlive
+	var dragonLive = self.get_parent().get_node("Player2").isAlive
+
+	# Add the next level
+	var gameOver = load("res://GameOver/ColorRect.tscn").instance()
+	gameOver.test(dragonLive, unicornLive)
+	root.add_child(gameOver)
 	
+	#get_tree().current_scene.replace_by(gameOver)
