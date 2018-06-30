@@ -202,7 +202,10 @@ func _integrate_forces(state):
 	var velocity = Vector2(0, 0)
 	
 	if (requestsJump() && onFloor()):
-		velocity += upDirection * jumpVelocity
+		var jump_factor = 1
+		if checkBlock() == "BlueBlock":
+			jump_factor = 2.7 
+		velocity += upDirection * jumpVelocity *jump_factor
 		$sounds/common/jump.play()
 		
 	inputMovementDirection = correctMovementAccordingToViewport(movementDirectionFromInput())
@@ -215,7 +218,7 @@ func _integrate_forces(state):
 		
 func checkSpikes():
 	var val = checkBlock()
-	if val == 8 or val == 7:
+	if val == "SpikeBlockWhite" or val == "SpikeBlockBlack":
 		isAlive = false
 		print("player died")
 		playerDies()
@@ -228,7 +231,8 @@ func checkBlock():
 	var playerBottomPosition = playerPos + Vector2(0, -upDirection.y * playerExt.y)
 	var tilePoint = playerBottomPosition + Vector2(0, -upDirection.y * verticalHalfTileExtent)
 	var tilePos = map.world_to_map(tilePoint)
-	return map.get_cellv(tilePos)
+	var tileID = map.get_cellv(tilePos)
+	return map.tile_set.tile_get_name(tileID)
 	
 
 var dead = false
