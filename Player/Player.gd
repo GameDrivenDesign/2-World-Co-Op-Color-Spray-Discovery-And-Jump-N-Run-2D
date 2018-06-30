@@ -18,7 +18,7 @@ export (NodePath) var mapPath
 
 export (int) var playerId = 1
 export (int) var movementVelocity = 100
-export (int) var jumpVelocity = 200
+export (int) var jumpVelocity = 400
 export (bool) var isAlive = true
 export (String, "white", "black", "red", "magenta", \
 				"blue", "cyan", "green", "yellow") var startColor = "green"
