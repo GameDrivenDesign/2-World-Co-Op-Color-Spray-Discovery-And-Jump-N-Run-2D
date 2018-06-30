@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Tileset/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Levels/GravityAreas.tscn" type="PackedScene" id=2]
@@ -6,8 +6,9 @@
 [ext_resource path="res://Player/unicorn.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ColorBucket/ColorBucket.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Player/Dragon.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Audio/Music/happy_loop.ogg" type="AudioStream" id=7]
 
-[node name="Level0" type="Node2D" index="0"]
+[node name="Level0" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="." index="0"]
 
@@ -60,5 +61,15 @@ mode = 2
 mapPath = NodePath("../TileMap")
 playerId = 2
 startColor = "cyan"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="7"]
+
+stream = ExtResource( 7 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = true
+mix_target = 0
+bus = "Master"
+_sections_unfolded = [ "Pause" ]
 
 
