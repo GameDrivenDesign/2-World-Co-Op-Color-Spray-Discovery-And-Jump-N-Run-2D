@@ -1283,7 +1283,7 @@ _sections_unfolded = [ "Angle", "Color", "Damping", "Gravity", "Hue Variation", 
 custom_solver_bias = 0.0
 extents = Vector2( 15.4891, 14.0574 )
 
-[node name="Dragon" type="RigidBody2D" index="0"]
+[node name="Dragon" type="RigidBody2D"]
 
 position = Vector2( 0.387421, -3.2931 )
 input_pickable = false
