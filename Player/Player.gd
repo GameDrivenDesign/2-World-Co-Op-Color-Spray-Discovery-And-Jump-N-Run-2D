@@ -214,6 +214,8 @@ func _integrate_forces(state):
 	currentLinearVelocity = state.linear_velocity	
 		
 func checkSpikes():
+	if not mapPath:
+		return
 	var map = get_node(mapPath)
 	var playerPos = position
 	var playerExt = get_node("CollisionShape2D").shape.extents
