@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Player/Dragon.gd" type="Script" id=1]
 [ext_resource path="res://Player/dragon/body.png" type="Texture" id=2]
 [ext_resource path="res://Player/dragon/tail.png" type="Texture" id=3]
 [ext_resource path="res://Player/dragon/leg.png" type="Texture" id=4]
 [ext_resource path="res://Player/dragon/wing.png" type="Texture" id=5]
+[ext_resource path="res://Player/player_sounds.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Animation" id=1]
 
@@ -1393,5 +1394,7 @@ _sections_unfolded = [ "Process Material", "Time", "Transform" ]
 position = Vector2( -0.562241, 4.67763 )
 scale = Vector2( 1, 1.38891 )
 shape = SubResource( 11 )
+
+[node name="sounds" parent="." index="2" instance=ExtResource( 6 )]
 
 
