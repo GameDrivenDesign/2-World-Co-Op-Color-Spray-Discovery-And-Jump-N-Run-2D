@@ -5,6 +5,7 @@ extends RigidBody2D
 # var a = 2
 # var b = "textvar"
 
+
 enum MovementState {
 	STANDING,
 	WALKING,
@@ -18,6 +19,7 @@ export (int) var playerId = 1
 export (int) var movementVelocity = 100
 export (int) var jumpVelocity = 200
 export (Color) var paintColor = Color(1.0, 0.0, 1.0) setget setPaintColor, getPaintColor
+export (bool) var isAlive = true
 
 var upDirection
 var inputMovementDirection
@@ -121,7 +123,9 @@ func _integrate_forces(state):
 	if (onFloor()):
 		state.transform.origin += upDirection * FLOOR_COLLISION_AVOIDANCE_DISTANCE
 		
+		
 func playerDies():
+	get_tree().change_scene("res://GameOver/ColorRect.tscn")
 	pass
 	
 	
