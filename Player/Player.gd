@@ -77,7 +77,7 @@ func processAnimation():
 		$Node2D.scale.x = -1
 	
 	if lastMovementState == MovementState.FALLING && (movementState == MovementState.STANDING || movementState == MovementState.WALKING):
-		$sounds/landing.play()
+		$sounds/common/landing.play()
 	
 	if movementState != lastMovementState:
 		var animationName
@@ -86,7 +86,7 @@ func processAnimation():
 				animationName = "standing"
 			MovementState.WALKING:
 				animationName = "walking"
-				$sounds/walking.play()
+				$sounds/common/walking.play()
 			MovementState.JUMPING:
 				animationName = "jumping"
 			MovementState.FALLING:
@@ -94,8 +94,8 @@ func processAnimation():
 			MovementState.STOMPING:
 				animationName = "stomping"
 		$Node2D/AnimationPlayer.play(animationName)
-	if movementState == MovementState.WALKING && !$sounds/walking.playing:
-		$sounds/walking.play()
+	if movementState == MovementState.WALKING && !$sounds/common/walking.playing:
+		$sounds/common/walking.play()
 
 func _process(delta):
 	updateMovementState()
@@ -169,7 +169,7 @@ func queuePaintBlock(tilePos):
 func disposeColor(delta):
 	if movementState == MovementState.STOMPING and movementState != lastMovementState:
 		queueTint()
-		$sounds/stomp.play()
+		$sounds/common/stomp.play()
 	
 	var newTintQueue = []
 	for element in blockTintQueue:
@@ -185,7 +185,7 @@ func correctMovementAccordingToViewport(movementFromInput):
 	if(posRelativeToViewportX < marginToScreenWidth and movementFromInput.x < 0) or (posRelativeToViewportX > screenDims.x - marginToScreenWidth and movementFromInput.x > 0):
 		movementFromInput.x = 0 # stop moving to far to one side
 	return movementFromInput
-	
+
 func stuckAvoidance(state):
 	if onFloor():
 		state.transform.origin += upDirection * STUCK_COLLISION_AVOIDANCE_DISTANCE
@@ -200,10 +200,13 @@ func _integrate_forces(state):
 	if movementState == MovementState.STOMPING:
 		return
 	var velocity = Vector2(0, 0)
+	
 	if (requestsJump() && onFloor()):
 		velocity += upDirection * jumpVelocity
-		$sounds/jump.play()
+		$sounds/common/jump.play()
+		
 	inputMovementDirection = correctMovementAccordingToViewport(movementDirectionFromInput())
+
 	velocity += inputMovementDirection * movementVelocity
 	state.linear_velocity += velocity
 	state.linear_velocity.x = clamp(state.linear_velocity.x, -movementVelocity, movementVelocity)
