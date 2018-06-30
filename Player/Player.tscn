@@ -9,7 +9,6 @@ extents = Vector2( 25, 25 )
 
 [node name="Player" type="RigidBody2D" index="0"]
 
-position = Vector2( 150.12, 91.8835 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
