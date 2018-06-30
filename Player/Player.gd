@@ -19,6 +19,7 @@ export (int) var movementVelocity = 100
 export (int) var jumpVelocity = 200
 export (String, "white", "black", "red", "magenta", \
 				"blue", "cyan", "green", "yellow") var startColor = "green"
+				
 
 var paintColor = Color(1.0, 0.0, 1.0) setget setPaintColor, getPaintColor
 
@@ -56,9 +57,7 @@ func processAnimation():
 	if inputMovementDirection.x > 0:
 		$Node2D.scale.x = 1
 	else:
-		$Node2D.scale.x = -1 
-	if playerId != 1:
-		return
+		$Node2D.scale.x = -1
 	var nextMovementState = currentMovementState()
 	if movementState != nextMovementState:
 		movementState = nextMovementState
@@ -118,8 +117,11 @@ func disposeColor():
 		var playerBottomPosition = playerPos + Vector2(0, -upDirection.y * playerExt.y)
 		var tilePoint = playerBottomPosition + Vector2(0, -upDirection.y * verticalHalfTileExtent)
 		var tilePos = map.world_to_map(tilePoint)
-		var currentTileIndex = map.get_cellv(tilePos)
-		map.set_cellv(tilePos, Colors.color_name_to_tile_index("blue"))
+		var currentTileIndex = 0
+		var currentColor = getPaintColor()
+		var tileName = Colors.rgb_to_color_name(currentColor).capitalize() + "Block"
+		var tileId = map.tile_set.find_tile_by_name(tileName)
+		map.set_cellv(tilePos, tileId)
 
 func correctMovementAccordingToViewport(movementFromInput):
 	var posRelativeToViewportX = get_global_transform_with_canvas().get_origin().x
@@ -132,6 +134,7 @@ func _integrate_forces(state):
 	var velocity = Vector2(0, 0)
 	if (requestsJump() && onFloor()):
 		velocity += upDirection * jumpVelocity
+		$sounds/jump.play()
 	inputMovementDirection = correctMovementAccordingToViewport(movementDirectionFromInput())
 	velocity += inputMovementDirection * movementVelocity
 	state.linear_velocity += velocity

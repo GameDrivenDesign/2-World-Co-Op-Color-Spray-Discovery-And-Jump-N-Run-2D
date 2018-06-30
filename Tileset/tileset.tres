@@ -1,12 +1,15 @@
-[gd_resource type="TileSet" load_steps=11 format=2]
+[gd_resource type="TileSet" load_steps=14 format=2]
 
 [ext_resource path="res://Assets/red_block.png" type="Texture" id=1]
 [ext_resource path="res://Assets/green_block.png" type="Texture" id=2]
-[ext_resource path="res://Assets/white_block.png" type="Texture" id=3]
-[ext_resource path="res://Assets/black_block.png" type="Texture" id=4]
-[ext_resource path="res://Assets/blue_block.png" type="Texture" id=5]
-[ext_resource path="res://Assets/spikes_white.png" type="Texture" id=6]
-[ext_resource path="res://Assets/spikes_black_block.png" type="Texture" id=7]
+[ext_resource path="res://Assets/cyan_block.png" type="Texture" id=3]
+[ext_resource path="res://Assets/magenta_block.png" type="Texture" id=4]
+[ext_resource path="res://Assets/yellow_block.png" type="Texture" id=5]
+[ext_resource path="res://Assets/white_block.png" type="Texture" id=6]
+[ext_resource path="res://Assets/black_block.png" type="Texture" id=7]
+[ext_resource path="res://Assets/blue_block.png" type="Texture" id=8]
+[ext_resource path="res://Assets/spikes_white.png" type="Texture" id=9]
+[ext_resource path="res://Assets/spikes_black_block.png" type="Texture" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -54,7 +57,7 @@ extents = Vector2( 25, 25 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 25, 25 )
 } ]
 2/name = "WhiteBlock"
-2/texture = ExtResource( 3 )
+2/texture = ExtResource( 6 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 0, 0, 50, 50 )
@@ -68,7 +71,7 @@ extents = Vector2( 25, 25 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 25, 25 )
 } ]
 3/name = "BlackBlock"
-3/texture = ExtResource( 4 )
+3/texture = ExtResource( 7 )
 3/tex_offset = Vector2( 0, 0 )
 3/modulate = Color( 1, 1, 1, 1 )
 3/region = Rect2( 0, 0, 50, 50 )
@@ -95,7 +98,7 @@ extents = Vector2( 25, 25 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 25, 25 )
 } ]
 5/name = "BlueBlock"
-5/texture = ExtResource( 5 )
+5/texture = ExtResource( 8 )
 5/tex_offset = Vector2( 0, 0 )
 5/modulate = Color( 1, 1, 1, 1 )
 5/region = Rect2( 0, 0, 50, 50 )
@@ -122,7 +125,7 @@ extents = Vector2( 25, 25 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 25, 25 )
 } ]
 7/name = "SpikeBlockWhite"
-7/texture = ExtResource( 6 )
+7/texture = ExtResource( 9 )
 7/tex_offset = Vector2( 0, 0 )
 7/modulate = Color( 1, 1, 1, 1 )
 7/region = Rect2( 0, 0, 50, 50 )
@@ -136,7 +139,7 @@ extents = Vector2( 25, 25 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 25, 25 )
 } ]
 8/name = "SpikeBlockBlack"
-8/texture = ExtResource( 7 )
+8/texture = ExtResource( 10 )
 8/tex_offset = Vector2( 0, 0 )
 8/modulate = Color( 1, 1, 1, 1 )
 8/region = Rect2( 0, 0, 50, 50 )
@@ -150,7 +153,7 @@ extents = Vector2( 25, 25 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 25, 25 )
 } ]
 9/name = "BlueBlock2"
-9/texture = ExtResource( 5 )
+9/texture = ExtResource( 8 )
 9/tex_offset = Vector2( 0, 0 )
 9/modulate = Color( 1, 1, 1, 1 )
 9/region = Rect2( 0, 0, 50, 50 )
@@ -158,6 +161,48 @@ extents = Vector2( 25, 25 )
 9/occluder_offset = Vector2( 25, 25 )
 9/navigation_offset = Vector2( 25, 25 )
 9/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"shape": SubResource( 1 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 25, 25 )
+} ]
+10/name = "CyanBlock"
+10/texture = ExtResource( 3 )
+10/tex_offset = Vector2( 0, 0 )
+10/modulate = Color( 1, 1, 1, 1 )
+10/region = Rect2( 0, 0, 50, 50 )
+10/is_autotile = false
+10/occluder_offset = Vector2( 25, 25 )
+10/navigation_offset = Vector2( 25, 25 )
+10/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"shape": SubResource( 1 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 25, 25 )
+} ]
+11/name = "MagentaBlock"
+11/texture = ExtResource( 4 )
+11/tex_offset = Vector2( 0, 0 )
+11/modulate = Color( 1, 1, 1, 1 )
+11/region = Rect2( 0, 0, 50, 50 )
+11/is_autotile = false
+11/occluder_offset = Vector2( 25, 25 )
+11/navigation_offset = Vector2( 25, 25 )
+11/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"shape": SubResource( 1 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 25, 25 )
+} ]
+12/name = "YellowBlock"
+12/texture = ExtResource( 5 )
+12/tex_offset = Vector2( 0, 0 )
+12/modulate = Color( 1, 1, 1, 1 )
+12/region = Rect2( 0, 0, 50, 50 )
+12/is_autotile = false
+12/occluder_offset = Vector2( 25, 25 )
+12/navigation_offset = Vector2( 25, 25 )
+12/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "shape": SubResource( 1 ),
