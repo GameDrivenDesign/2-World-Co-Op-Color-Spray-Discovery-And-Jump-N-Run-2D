@@ -242,6 +242,8 @@ func checkBlock():
 	var tilePoint = playerBottomPosition + Vector2(0, -upDirection.y * verticalHalfTileExtent)
 	var tilePos = map.world_to_map(tilePoint)
 	var tileID = map.get_cellv(tilePos)
+	if tileID == -1:
+		return null
 	return map.tile_set.tile_get_name(tileID)
 	
 
