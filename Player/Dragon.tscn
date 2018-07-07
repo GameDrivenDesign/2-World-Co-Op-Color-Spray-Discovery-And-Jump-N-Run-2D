@@ -1150,7 +1150,7 @@ tracks/14/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1, 0.484814 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
 }
 tracks/15/type = "value"
-tracks/15/path = NodePath("colorParticles:position")
+tracks/15/path = NodePath("Node2D/colorParticles:position")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/imported = false
@@ -1162,7 +1162,7 @@ tracks/15/keys = {
 "values": [ Vector2( -1.45515, 14.982 ), Vector2( -1.45515, 11.0098 ), Vector2( -1.05794, 20.1457 ), Vector2( -1.05794, 22.9262 ), Vector2( -0.660721, 24.5151 ), Vector2( -1.45515, 24.5151 ) ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=7]
 
 resource_name = "winning"
 length = 1.0
@@ -1349,7 +1349,7 @@ tracks/14/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1, 0.484814 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
 }
 tracks/15/type = "value"
-tracks/15/path = NodePath("colorParticles:position")
+tracks/15/path = NodePath("Node2D/colorParticles:position")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/imported = false
@@ -1361,7 +1361,7 @@ tracks/15/keys = {
 "values": [ Vector2( -0.387421, 23.2931 ), Vector2( -0.387421, 13.2931 ), Vector2( -0.387421, 23.2931 ), Vector2( -0.387421, 23.2931 ) ]
 }
 tracks/16/type = "value"
-tracks/16/path = NodePath("colorStomp:emitting")
+tracks/16/path = NodePath("Node2D/colorStomp:emitting")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/imported = false
@@ -1373,7 +1373,7 @@ tracks/16/keys = {
 "values": [ false, true, false ]
 }
 
-[sub_resource type="ParticlesMaterial" id=14]
+[sub_resource type="ParticlesMaterial" id=8]
 
 render_priority = 0
 trail_divisor = 1
@@ -1412,20 +1412,20 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Color", "Gravity", "Hue Variation", "Initial Velocity", "Scale", "Spread" ]
 
-[sub_resource type="Curve" id=15]
+[sub_resource type="Curve" id=9]
 
 min_value = 0.0
 max_value = 1.0
 bake_resolution = 100
 _data = [ Vector2( 0, 1 ), 0.0, 0.509702, 0, 0, Vector2( 0.997977, 0.613254 ), -0.630148, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=16]
+[sub_resource type="CurveTexture" id=10]
 
 flags = 4
 width = 2048
-curve = SubResource( 15 )
+curve = SubResource( 9 )
 
-[sub_resource type="ParticlesMaterial" id=17]
+[sub_resource type="ParticlesMaterial" id=11]
 
 render_priority = 0
 trail_divisor = 1
@@ -1454,7 +1454,7 @@ angle = 0.0
 angle_random = 0.0
 scale = 5.0
 scale_random = 0.3
-scale_curve = SubResource( 16 )
+scale_curve = SubResource( 10 )
 color = Color( 1, 0.585938, 0, 1 )
 hue_variation = 0.1
 hue_variation_random = 1.0
@@ -1552,7 +1552,7 @@ anims/jumping = SubResource( 2 )
 anims/standing = SubResource( 4 )
 anims/stomping = SubResource( 5 )
 anims/walking = SubResource( 6 )
-anims/winning = SubResource( 13 )
+anims/winning = SubResource( 7 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 
@@ -1572,7 +1572,7 @@ fract_delta = true
 visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = false
 draw_order = 0
-process_material = SubResource( 14 )
+process_material = SubResource( 8 )
 texture = null
 normal_map = null
 h_frames = 1
@@ -1596,7 +1596,7 @@ fract_delta = true
 visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = false
 draw_order = 0
-process_material = SubResource( 17 )
+process_material = SubResource( 11 )
 texture = null
 normal_map = null
 h_frames = 1
